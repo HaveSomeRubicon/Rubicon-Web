@@ -108,9 +108,9 @@ class MainWindow(QMainWindow):
         navbar.addAction(forward_button)
 
         # Add reload button
-        reload_button = QAction('Reload', self)
-        reload_button.triggered.connect(lambda: self.tabs.currentWidget().reload())
-        navbar.addAction(reload_button)
+        self.reload_stop_button = QAction('Reload', self)
+        self.reload_stop_button.triggered.connect(lambda: self.tabs.currentWidget().reload())
+        navbar.addAction(self.reload_stop_button)
 
         # Add home button
         home_button = QAction('Home', self)
@@ -163,6 +163,12 @@ class MainWindow(QMainWindow):
                 self.progress_bar.show()
         browser.loadProgress.connect(update_progress_bar)
         
+        # Set reload/stop button to stop when loading the page start
+        def load_started():
+            self.reload_stop_button.setText("Stop")
+            self.reload_stop_button.triggered.connect(lambda: self.tabs.currentWidget().stop())
+        browser.loadStarted.connect(load_started)
+        
         # Set tab title and icon when page finishes loading
         def load_finished(_, i=tab_index, browser=browser):
             # Shorten tab title if its too long then set the tab title
@@ -173,6 +179,9 @@ class MainWindow(QMainWindow):
             self.tabs.setTabText(tab_index, title)
             # Set tab icon
             self.tabs.setTabIcon(tab_index, browser.page().icon())
+            # Set reload/stop button to reload
+            self.reload_stop_button.setText("Reload") 
+            self.reload_stop_button.triggered.connect(lambda: self.tabs.currentWidget().reload())
             # Focus url bar
             self.url_bar.setFocus()
         browser.loadFinished.connect(load_finished)
@@ -265,7 +274,7 @@ class MainWindow(QMainWindow):
 
 app = QApplication(sys.argv)
 app.setApplicationName("Homie Web")
-app.setWindowIcon(QIcon("images/png/Homie Web Logo.png"))
+app.setWindowIcon(QIcon("../res/png/Homie Web Logo.png"))
 
 window = MainWindow()
 window.show()
