@@ -76,6 +76,7 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
 
         self.setWindowTitle('Homie Web Test')
+        self.setWindowIcon(QIcon("assets/png/Homie Web Logo.png"))
 
         # Create a toolbar
         navbar = QToolBar()
@@ -239,7 +240,6 @@ class MainWindow(QMainWindow):
 
 app = QApplication(sys.argv)
 app.setApplicationName("Homie Web")
-app.setWindowIcon(QIcon("../res/png/Homie Web Logo.png"))
 
 window = MainWindow()
 window.show()
