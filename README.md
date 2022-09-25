@@ -32,7 +32,7 @@
     Prerequisites:
   </h3>
   
-  <p align="center">Make sure you have git, python3.6 or higher and pip installed before you download and run Homie Web</p>
+  <p align="center">Make sure you have Git, Python3.6 or higher and pip installed before you download and run Homie Web. You can install Python from the Microsoft Store or python.org and pip should automatically be installed with python. You can learn how to install git for your operating system with a quick Google search.</p>
     
   <h3 align="center">
     Downloading and Running:
