@@ -208,10 +208,6 @@ class MainWindow(QMainWindow):
             browser = self.tabs.widget(tab_index)
             browser.close()
             self.tabs.removeTab(tab_index)
-            # browser.setUrl(QUrl('about:blank'))
-            # def load_finished():
-            #     self.tabs.removeTab(tab_index)
-            # browser.loadFinished.connect(load_finished)
 
     def set_url(self):
         url_bar_text = self.url_bar.text()
@@ -231,47 +227,6 @@ class MainWindow(QMainWindow):
         # Set current tab web engine's qurl to the new qurl
         self.tabs.currentWidget().setUrl(qurl)
         self.tabs.currentWidget().setFocus()
-
-            
-    # def set_url1(self):
-    #     url_bar_text = self.url_bar.text()
-        
-    #     # Get QUrl from url bar
-    #     qurl = QUrl(url_bar_text)
-        
-    #     # Set qurl_http to QUrl from url bar text with the scheme set as http
-    #     qurl_http = QUrl(url_bar_text)
-    #     qurl_http.setScheme('http')
-        
-    #     # Set qurl_http to the string version of qurl_http
-    #     qurl_http_string = qurl_http.toString()
-
-    #     # Add the 2 slashes after the colon in http: or https: if they arent there
-    #     if not qurl_http_string.startswith('https://') or not qurl_http_string.startswith('http://'):
-    #         if qurl_http_string.startswith('http:') or qurl_http_string.startswith('https:'):
-    #             qurl_http_string = qurl_http_string.replace(':', '://', 1)
-        
-    #     # Update qurl_http to include the fixes made to qurl_http_string
-    #     qurl_http = QUrl(qurl_http_string)
-
-    #     # Set scheme to http if no scheme was given
-    #     if qurl.scheme() == "":
-    #         # Set qurl scheme to http if it works
-    #         if validators.url(qurl_http_string) == True:
-    #             qurl.setScheme('http')
-    #         else:
-    #             # Search for url bar text in Ecosia if the text in url bar isnt a valid url
-    #             if validators.url(qurl_http_string) != True:
-    #                 # Convert url bar text to safe characters
-    #                 safe_query = url_bar_text
-    #                 safe_query = quote_plus(safe_query)
-    #                 safe_query.replace(':', '%3A')
-    #                 # Put search query in search url
-    #                 search_url = f"https://www.ecosia.org/search?q={safe_query}"
-    #                 qurl = QUrl(search_url)
-
-    #     # Set current tabs page to the qurl
-    #     self.tabs.currentWidget().setUrl(qurl)
     
     def update_url_bar(self, qurl, browser=None):
         # Check if signal is from the current tab
