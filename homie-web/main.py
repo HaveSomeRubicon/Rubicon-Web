@@ -49,22 +49,25 @@ class UrlBar(QLineEdit):
         super(UrlBar, self).__init__(parent)
         self.focused = False
 
+    def selectAll(self):
+        super(UrlBar, self).selectAll()
+        if not self.focused:
+            self.focused = True
+
+    def deselect(self):
+        super(UrlBar, self).deselect()
+        if self.focused:
+            self.focused = False
+    
     def mousePressEvent(self, event, parent=None) -> None:
         super(UrlBar, self).mousePressEvent(event)
         if not self.focused:
             self.selectAll()
-            self.focused = True
     
     def focusOutEvent(self, event) -> None:
         super(UrlBar, self).focusOutEvent(event)
-        self.deselect()
-        self.focused = False
-    
-    def setFocus(self):
-        super(UrlBar, self).setFocus()
-        if not self.focused:
-            self.selectAll()
-            self.focused = True
+        if self.focused:
+            self.deselect()
 
 
 class MainWindow(QMainWindow):
@@ -94,9 +97,6 @@ class MainWindow(QMainWindow):
         self.tabs.setTabsClosable(True)
         self.tabs.tabCloseRequested.connect(self.close_current_tab)
 
-        # Open new tab on start
-        self.new_tab()
-        
         # Add back button
         back_button = QAction('Back', self)
         back_button.triggered.connect(lambda: self.tabs.currentWidget().back())
@@ -133,6 +133,9 @@ class MainWindow(QMainWindow):
         self.progress_bar.setTextVisible(False)
         main_layout.addWidget(self.progress_bar)
 
+        # Open new tab on start
+        self.new_tab()
+        
         # Set the tabs widget as central widget
         central_widget = QWidget()
         central_widget.setLayout(main_layout)
@@ -169,23 +172,30 @@ class MainWindow(QMainWindow):
             self.reload_stop_button.triggered.connect(lambda: self.tabs.currentWidget().stop())
         browser.loadStarted.connect(load_started)
         
-        # Set tab title and icon when page finishes loading
-        def load_finished(_, i=tab_index, browser=browser):
-            # Shorten tab title if its too long then set the tab title
-            if len(browser.page().title()) >= 15:
-                title = f"{browser.page().title()[:12]}..."
-            else:
-                title = browser.page().title()
-            self.tabs.setTabText(tab_index, title)
-            # Set tab icon
-            self.tabs.setTabIcon(tab_index, browser.page().icon())
-            # Set reload/stop button to reload
-            self.reload_stop_button.setText("Reload") 
-            self.reload_stop_button.triggered.connect(lambda: self.tabs.currentWidget().reload())
-            # Focus url bar
-            self.url_bar.setFocus()
-        browser.loadFinished.connect(load_finished)
-
+        # A function stored in a class which runs when web page finishes loading
+        class LoadFinishedFunction:
+            def __init__(self2):
+                self2.tab_is_new = True
+        
+            def load_finished(self2, i=tab_index, browser=browser):
+                # Shorten tab title if its too long then set the tab title
+                if len(browser.page().title()) >= 15:
+                    title = f"{browser.page().title()[:12]}..."
+                else:
+                    title = browser.page().title()
+                self.tabs.setTabText(tab_index, title)
+                # Set tab icon
+                self.tabs.setTabIcon(tab_index, browser.page().icon())
+                # Set reload/stop button to reload
+                self.reload_stop_button.setText("Reload") 
+                self.reload_stop_button.triggered.connect(lambda: self.tabs.currentWidget().reload())
+                # Select all url bar text if tab is new
+                if self2.tab_is_new:
+                    self.url_bar.selectAll()
+                    self.url_bar.setFocus()
+                    self2.tab_is_new = False
+        load_finished_func = LoadFinishedFunction()
+        browser.loadFinished.connect(lambda: load_finished_func.load_finished())
 
         # Return WebEngineView object
         return browser
