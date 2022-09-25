@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/mahdi/Desktop/Coding/Python Projects/Bruddah Browser/env"
+VIRTUAL_ENV="/home/mahdi/Desktop/Coding/Python Projects/Bruddah Browser/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
@@ -54,8 +54,8 @@ fi
 
 if [ -z "${VIRTUAL_ENV_DISABLE_PROMPT:-}" ] ; then
     _OLD_VIRTUAL_PS1="${PS1:-}"
-    if [ "x(env) " != x ] ; then
-	PS1="(env) ${PS1:-}"
+    if [ "x(venv) " != x ] ; then
+	PS1="(venv) ${PS1:-}"
     else
     if [ "`basename \"$VIRTUAL_ENV\"`" = "__" ] ; then
         # special case for Aspen magic directories
