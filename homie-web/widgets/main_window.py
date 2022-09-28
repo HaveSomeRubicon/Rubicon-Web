@@ -1,3 +1,5 @@
+import os
+
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMainWindow, QGridLayout, QWidget
 
@@ -6,13 +8,16 @@ from widgets.tabbed_browser import TabbedBrowser
 from widgets.load_progress_bar import LoadProgressBar
 
 
+basedir = os.path.dirname(__file__)
+
+
 class MainWindow(QMainWindow):
     # Constructor
     def __init__(self):
         super(MainWindow, self).__init__()
 
         self.setWindowTitle('Homie Web Test')
-        self.setWindowIcon(QIcon("assets/png/Homie Web Logo.png"))
+        self.setWindowIcon(QIcon(os.path.join(basedir, "assets/png/Homie Web Logo.png")))
 
         # Create the navbar and show it
         self.navbar = NavBar(self)
