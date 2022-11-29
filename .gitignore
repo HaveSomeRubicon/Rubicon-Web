@@ -1,6 +1,9 @@
 gfg browser.py
 test browser.py
 
+# Qt Creator autosaves
+*.autosave
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
