@@ -59,6 +59,9 @@ class MainWindow(QMainWindow):
             widget.setStyleSheet(widget_stylesheet)
             widget.show()
         
+        self.web_views = QStackedWidget()
+        self.main_layout.addWidget(self.web_views)
+        
         self.tabs.setDrawBase(False)
         
         self.setWindowTitle("Homie Web")

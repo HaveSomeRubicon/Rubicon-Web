@@ -387,10 +387,6 @@ QLineEdit:focus {
         </property>
        </column>
       </widget>
-      <widget class="QStackedWidget" name="web_views">
-       <widget class="QWidget" name="page"/>
-       <widget class="QWidget" name="page_2"/>
-      </widget>
      </widget>
     </item>
    </layout>
