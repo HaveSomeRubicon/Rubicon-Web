@@ -63,5 +63,6 @@ class MainWindow(QMainWindow):
         self.main_layout.addWidget(self.web_views)
         
         self.tabs.setDrawBase(False)
+        self.tabs.setMovable(True)
         
         self.setWindowTitle("Homie Web")
