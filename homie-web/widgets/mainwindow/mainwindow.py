@@ -1,9 +1,11 @@
 import os
 
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QUrl
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMainWindow, QStackedWidget
 from PyQt5.uic import loadUi
+
+from ..web_engine.web_engine import WebEngineView
 
 
 themes = {
@@ -81,6 +83,19 @@ class MainWindow(QMainWindow):
         widget.setAttribute(Qt.WA_DeleteOnClose, True)
         
         return tab_index
+    
+    def new_web_view_tab(self, url: QUrl):
+        browser = WebEngineView(self, self)
+        browser.setUrl(url)
+        tab_index = self.new_tab(browser, "Loading...")
+        
+        def browser_load_finished(browser):
+            title = browser.page().title()
+            icon = browser.page().icon()
+            self.tabs.setTabText(tab_index, title)
+            self.tabs.setTabIcon(tab_index, icon)
+        
+        browser.loadFinished.connect(lambda: browser_load_finished(browser))
     
     def tab_changed(self, tab_index):
         self.web_views.setCurrentIndex(tab_index)
