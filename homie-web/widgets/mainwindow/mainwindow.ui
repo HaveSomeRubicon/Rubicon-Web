@@ -301,7 +301,7 @@ QLineEdit:focus {
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="home_button">
+           <widget class="QPushButton" name="reload_and_stop_button">
             <property name="text">
              <string>Z</string>
             </property>
