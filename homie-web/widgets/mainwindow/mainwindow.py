@@ -2,7 +2,7 @@ import os
 
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QMainWindow, QLabel, QTabBar
+from PyQt5.QtWidgets import QMainWindow
 from PyQt5.uic import loadUi
 
 
