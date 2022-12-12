@@ -2,7 +2,7 @@ import os
 
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QMainWindow, QStackedWidget
 from PyQt5.uic import loadUi
 
 
@@ -64,5 +64,15 @@ class MainWindow(QMainWindow):
         
         self.tabs.setDrawBase(False)
         self.tabs.setMovable(True)
+        self.tabs.currentChanged.connect(self.tab_changed)
+        self.tabs.tabMoved.connect(self.tab_moved)
         
         self.setWindowTitle("Homie Web")
+    
+    def tab_changed(self, tab_index):
+        self.web_views.setCurrentIndex(tab_index)
+    
+    def tab_moved(self, to, _from):
+        moved_tab_widget = self.web_views.widget(_from)
+        self.web_views.removeWidget(moved_tab_widget)
+        self.web_views.insertWidget(to, moved_tab_widget)
