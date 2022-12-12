@@ -75,6 +75,8 @@ class MainWindow(QMainWindow):
         else:
             self.tabs.addTab(title)
         self.web_views.addWidget(widget)
+        
+        widget.setAttribute(Qt.WA_DeleteOnClose, True)
     
     def tab_changed(self, tab_index):
         self.web_views.setCurrentIndex(tab_index)
