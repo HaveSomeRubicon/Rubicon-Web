@@ -68,6 +68,13 @@ class MainWindow(QMainWindow):
         self.tabs.tabMoved.connect(self.tab_moved)
         
         self.setWindowTitle("Homie Web")
+
+    def new_tab(self, widget, title: str = "Untitled tab", icon: QIcon = None):
+        if icon is not None:
+            self.tabs.addTab(icon, title)
+        else:
+            self.tabs.addTab(title)
+        self.web_views.addWidget(widget)
     
     def tab_changed(self, tab_index):
         self.web_views.setCurrentIndex(tab_index)
