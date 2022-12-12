@@ -69,6 +69,10 @@ class MainWindow(QMainWindow):
         self.tabs.currentChanged.connect(self.tab_changed)
         self.tabs.tabMoved.connect(self.tab_moved)
         
+        self.default_qurl = QUrl("https://ecosia.org/")
+        self.default_tab = lambda: self.new_web_view_tab(self.default_qurl)
+        self.default_tab()
+        
         self.main_layout.setSizes([0])
         
         self.setWindowTitle("Homie Web")
