@@ -71,12 +71,14 @@ class MainWindow(QMainWindow):
 
     def new_tab(self, widget, title: str = "Untitled tab", icon: QIcon = None):
         if icon is not None:
-            self.tabs.addTab(icon, title)
+            tab_index = self.tabs.addTab(icon, title)
         else:
-            self.tabs.addTab(title)
+            tab_index = self.tabs.addTab(title)
         self.web_views.addWidget(widget)
         
         widget.setAttribute(Qt.WA_DeleteOnClose, True)
+        
+        return tab_index
     
     def tab_changed(self, tab_index):
         self.web_views.setCurrentIndex(tab_index)
