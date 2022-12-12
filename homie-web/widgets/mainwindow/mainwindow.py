@@ -67,6 +67,8 @@ class MainWindow(QMainWindow):
         self.tabs.currentChanged.connect(self.tab_changed)
         self.tabs.tabMoved.connect(self.tab_moved)
         
+        self.main_layout.setSizes([0])
+        
         self.setWindowTitle("Homie Web")
 
     def new_tab(self, widget, title: str = "Untitled tab", icon: QIcon = None):
