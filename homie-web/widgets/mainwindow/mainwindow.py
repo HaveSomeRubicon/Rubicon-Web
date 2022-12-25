@@ -73,6 +73,8 @@ class MainWindow(QMainWindow):
         self.default_tab = lambda: self.new_web_view_tab(self.default_qurl)
         self.default_tab()
         
+        self.new_tab_button.clicked.connect(self.default_tab)
+        
         self.main_layout.setSizes([0])
         
         self.setWindowTitle("Homie Web")
