@@ -1,4 +1,5 @@
 import os
+import sys
 
 from PyQt5.QtCore import Qt, QUrl
 from PyQt5.QtGui import QIcon
@@ -68,6 +69,8 @@ class MainWindow(QMainWindow):
         
         self.tabs.setDrawBase(False)
         self.tabs.setMovable(True)
+        self.tabs.setTabsClosable(True)
+        self.tabs.tabCloseRequested.connect(self.close_tab)
         self.tabs.currentChanged.connect(self.tab_changed)
         self.tabs.tabMoved.connect(self.tab_moved)
         
@@ -91,7 +94,7 @@ class MainWindow(QMainWindow):
         if not background:
             self.tabs.setCurrentIndex(tab_index)
         
-        widget.setAttribute(Qt.WA_DeleteOnClose, True) # switch widget to self.web_views.getTab
+        self.web_views.widget(tab_index).setAttribute(Qt.WA_DeleteOnClose, True)
         
         return tab_index
     
@@ -110,6 +113,16 @@ class MainWindow(QMainWindow):
         browser.loadFinished.connect(lambda: browser_load_finished(browser))
         
         return tab_index
+    
+    def close_tab(self, tab_index):
+        if self.tabs.count() <= 1:
+            # TODO: Open a dialog to ask the user if they want to close entire web browser when all tabs are closed
+            sys.exit()
+        else:
+            browser = self.web_views.widget(tab_index)
+            browser.close()
+            self.web_views.removeWidget(self.web_views.widget(tab_index))
+            self.tabs.removeTab(tab_index)
     
     def tab_changed(self, tab_index):
         self.web_views.setCurrentIndex(tab_index)
