@@ -95,9 +95,10 @@ class MainWindow(QMainWindow):
         
         return tab_index
     
-    def new_web_view_tab(self, url: QUrl, background: bool = True):
+    def new_web_view_tab(self, url: QUrl = None, background: bool = True):
         browser = WebEngineView(self)
-        browser.setUrl(url)
+        if url != None:
+            browser.setUrl(url)
         tab_index = self.new_tab(browser, "Loading...", background = background)
         
         def browser_load_finished(browser):
