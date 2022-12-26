@@ -88,14 +88,14 @@ class MainWindow(QMainWindow):
             tab_index = self.tabs.addTab(title)
         self.web_views.addWidget(widget)
         
-        if background:
+        if not background:
             self.tabs.setCurrentIndex(tab_index)
         
         widget.setAttribute(Qt.WA_DeleteOnClose, True) # switch widget to self.web_views.getTab
         
         return tab_index
     
-    def new_web_view_tab(self, url: QUrl = None, background: bool = True):
+    def new_web_view_tab(self, url: QUrl = None, background: bool = False):
         browser = WebEngineView(self)
         if url != None:
             browser.setUrl(url)
