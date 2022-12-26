@@ -105,6 +105,8 @@ class MainWindow(QMainWindow):
             self.tabs.setTabIcon(tab_index, icon)
         
         browser.loadFinished.connect(lambda: browser_load_finished(browser))
+        
+        return tab_index
     
     def tab_changed(self, tab_index):
         self.web_views.setCurrentIndex(tab_index)
