@@ -79,21 +79,24 @@ class MainWindow(QMainWindow):
         
         self.setWindowTitle("Homie Web")
 
-    def new_tab(self, widget, title: str = "Untitled tab", icon: QIcon = None):
+    def new_tab(self, widget, title: str = "Untitled tab", icon: QIcon = None, background: bool = True):
         if icon is not None:
             tab_index = self.tabs.addTab(icon, title)
         else:
             tab_index = self.tabs.addTab(title)
         self.web_views.addWidget(widget)
         
-        widget.setAttribute(Qt.WA_DeleteOnClose, True)
+        if background:
+            self.tabs.setCurrentIndex(tab_index)
+        
+        widget.setAttribute(Qt.WA_DeleteOnClose, True) # switch widget to self.web_views.getTab
         
         return tab_index
     
-    def new_web_view_tab(self, url: QUrl):
-        browser = WebEngineView(self, self)
+    def new_web_view_tab(self, url: QUrl, background: bool = True):
+        browser = WebEngineView(self)
         browser.setUrl(url)
-        tab_index = self.new_tab(browser, "Loading...")
+        tab_index = self.new_tab(browser, "Loading...", background = background)
         
         def browser_load_finished(browser):
             title = browser.page().title()
