@@ -47,9 +47,11 @@ themes = {
 
 
 class MainWindow(QMainWindow):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, config, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
         loadUi("homie-web/widgets/mainwindow/mainwindow.ui", self)
+        
+        self.config = config
         
         self.THEME = themes["red"]
         widgets_with_stylesheets = [self.centralwidget, self.navbar, self.main_bar, self.tab_bar, self.window_management_buttons]
