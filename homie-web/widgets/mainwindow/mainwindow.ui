@@ -116,16 +116,6 @@ QTabBar::tab:selected {
            <number>2</number>
           </property>
           <item>
-           <widget class="QTabBar" name="tabs" native="true">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QWidget" name="window_management_buttons" native="true">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
@@ -402,14 +392,6 @@ QLineEdit:focus {
    </property>
   </widget>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>QTabBar</class>
-   <extends>QWidget</extends>
-   <header>qtabbar.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

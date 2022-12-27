@@ -2,11 +2,11 @@ import os
 import sys
 
 from PyQt5.QtCore import Qt, QUrl
-from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QMainWindow, QStackedWidget
+from PyQt5.QtWidgets import QMainWindow
 from PyQt5.uic import loadUi
 
-from ..web_engine.web_engine import WebEngineView
+from ..tabs.tabs import Tabs
+from ..tab_widgets.tab_widgets import TabWidgets
 
 
 themes = {
@@ -64,18 +64,14 @@ class MainWindow(QMainWindow):
             widget.setStyleSheet(widget_stylesheet)
             widget.show()
         
-        self.tab_widgets = QStackedWidget()
+        self.tab_widgets = TabWidgets()
         self.main_layout.addWidget(self.tab_widgets)
         
-        self.tabs.setDrawBase(False)
-        self.tabs.setMovable(True)
-        self.tabs.setTabsClosable(True)
-        self.tabs.tabCloseRequested.connect(self.close_tab)
-        self.tabs.currentChanged.connect(self.tab_changed)
-        self.tabs.tabMoved.connect(self.tab_moved)
+        self.tabs = Tabs(self)
+        self.tab_bar_layout.insertWidget(0, self.tabs)
         
         self.default_qurl = QUrl("https://ecosia.org/")
-        self.default_tab = lambda: self.new_web_view_tab(self.default_qurl)
+        self.default_tab = lambda: self.tabs.new_web_view_tab(self.default_qurl)
         self.default_tab()
         
         self.back_button.clicked.connect(lambda: self.tab_widgets.currentWidget().back())
@@ -87,59 +83,3 @@ class MainWindow(QMainWindow):
         self.main_layout.setSizes([0])
         
         self.setWindowTitle("Homie Web")
-
-    def new_tab(self, widget, title: str = "Untitled tab", icon: QIcon = None, background: bool = True):
-        if icon is not None:
-            tab_index = self.tabs.addTab(icon, title)
-        else:
-            tab_index = self.tabs.addTab(title)
-        self.tab_widgets.addWidget(widget)
-        
-        if not background:
-            self.tabs.setCurrentIndex(tab_index)
-        
-        self.tab_widgets.widget(tab_index).setAttribute(Qt.WA_DeleteOnClose, True)
-        
-        return tab_index
-    
-    def new_web_view_tab(self, url: QUrl = None, background: bool = False):
-        browser = WebEngineView(self)
-        if url != None:
-            browser.setUrl(url)
-        tab_index = self.new_tab(browser, "Loading...", background = background)
-        
-        def browser_load_started():
-            self.reload_and_stop_button.setText("9")
-            self.reload_and_stop_button.clicked.connect(lambda: self.tab_widgets.currentWidget().stop())
-        
-        def browser_load_finished():
-            self.reload_and_stop_button.setText("Z")
-            self.reload_and_stop_button.clicked.connect(lambda: self.tab_widgets.currentWidget().reload())
-            
-            title = browser.page().title()
-            icon = browser.page().icon()
-            self.tabs.setTabText(tab_index, title)
-            self.tabs.setTabIcon(tab_index, icon)
-        
-        browser.loadProgress.connect(browser_load_started)
-        browser.loadFinished.connect(browser_load_finished)
-        
-        return tab_index
-    
-    def close_tab(self, tab_index):
-        if self.tabs.count() <= 1:
-            # TODO: Open a dialog to ask the user if they want to close entire web browser when all tabs are closed
-            sys.exit()
-        else:
-            browser = self.tab_widgets.widget(tab_index)
-            browser.close()
-            self.tab_widgets.removeWidget(self.tab_widgets.widget(tab_index))
-            self.tabs.removeTab(tab_index)
-    
-    def tab_changed(self, tab_index):
-        self.tab_widgets.setCurrentIndex(tab_index)
-    
-    def tab_moved(self, to, _from):
-        moved_tab_widget = self.tab_widgets.widget(_from)
-        self.tab_widgets.removeWidget(moved_tab_widget)
-        self.tab_widgets.insertWidget(to, moved_tab_widget)
