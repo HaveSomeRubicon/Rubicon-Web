@@ -64,8 +64,8 @@ class MainWindow(QMainWindow):
             widget.setStyleSheet(widget_stylesheet)
             widget.show()
         
-        self.web_views = QStackedWidget()
-        self.main_layout.addWidget(self.web_views)
+        self.tab_widgets = QStackedWidget()
+        self.main_layout.addWidget(self.tab_widgets)
         
         self.tabs.setDrawBase(False)
         self.tabs.setMovable(True)
@@ -78,9 +78,9 @@ class MainWindow(QMainWindow):
         self.default_tab = lambda: self.new_web_view_tab(self.default_qurl)
         self.default_tab()
         
-        self.back_button.clicked.connect(lambda: self.web_views.currentWidget().back())
+        self.back_button.clicked.connect(lambda: self.tab_widgets.currentWidget().back())
 
-        self.forward_button.clicked.connect(lambda: self.web_views.currentWidget().forward())
+        self.forward_button.clicked.connect(lambda: self.tab_widgets.currentWidget().forward())
 
         self.new_tab_button.clicked.connect(self.default_tab)
         
@@ -93,12 +93,12 @@ class MainWindow(QMainWindow):
             tab_index = self.tabs.addTab(icon, title)
         else:
             tab_index = self.tabs.addTab(title)
-        self.web_views.addWidget(widget)
+        self.tab_widgets.addWidget(widget)
         
         if not background:
             self.tabs.setCurrentIndex(tab_index)
         
-        self.web_views.widget(tab_index).setAttribute(Qt.WA_DeleteOnClose, True)
+        self.tab_widgets.widget(tab_index).setAttribute(Qt.WA_DeleteOnClose, True)
         
         return tab_index
     
@@ -110,11 +110,11 @@ class MainWindow(QMainWindow):
         
         def browser_load_started():
             self.reload_and_stop_button.setText("9")
-            self.reload_and_stop_button.clicked.connect(lambda: self.web_views.currentWidget().stop())
+            self.reload_and_stop_button.clicked.connect(lambda: self.tab_widgets.currentWidget().stop())
         
         def browser_load_finished():
             self.reload_and_stop_button.setText("Z")
-            self.reload_and_stop_button.clicked.connect(lambda: self.web_views.currentWidget().reload())
+            self.reload_and_stop_button.clicked.connect(lambda: self.tab_widgets.currentWidget().reload())
             
             title = browser.page().title()
             icon = browser.page().icon()
@@ -131,15 +131,15 @@ class MainWindow(QMainWindow):
             # TODO: Open a dialog to ask the user if they want to close entire web browser when all tabs are closed
             sys.exit()
         else:
-            browser = self.web_views.widget(tab_index)
+            browser = self.tab_widgets.widget(tab_index)
             browser.close()
-            self.web_views.removeWidget(self.web_views.widget(tab_index))
+            self.tab_widgets.removeWidget(self.tab_widgets.widget(tab_index))
             self.tabs.removeTab(tab_index)
     
     def tab_changed(self, tab_index):
-        self.web_views.setCurrentIndex(tab_index)
+        self.tab_widgets.setCurrentIndex(tab_index)
     
     def tab_moved(self, to, _from):
-        moved_tab_widget = self.web_views.widget(_from)
-        self.web_views.removeWidget(moved_tab_widget)
-        self.web_views.insertWidget(to, moved_tab_widget)
+        moved_tab_widget = self.tab_widgets.widget(_from)
+        self.tab_widgets.removeWidget(moved_tab_widget)
+        self.tab_widgets.insertWidget(to, moved_tab_widget)
