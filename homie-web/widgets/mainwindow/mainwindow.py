@@ -55,14 +55,6 @@ class MainWindow(QMainWindow):
         self.config = config
         
         self.THEME = themes["red"]
-        widgets_with_stylesheets = [self.centralwidget, self.navbar, self.main_bar, self.tab_bar, self.window_management_buttons]
-        for widget in widgets_with_stylesheets:
-            widget.hide()
-            widget_stylesheet = widget.styleSheet()
-            for key in self.THEME["colors"].keys():
-                widget_stylesheet = widget_stylesheet.replace('/' + key + '/', self.THEME["colors"][key])
-            widget.setStyleSheet(widget_stylesheet)
-            widget.show()
         
         self.tab_widgets = TabWidgets()
         self.main_layout.addWidget(self.tab_widgets)
@@ -82,4 +74,16 @@ class MainWindow(QMainWindow):
         
         self.main_layout.setSizes([0])
         
+        widgets_with_stylesheets = [self.centralwidget, self.navbar, self.main_bar, self.tab_bar, self.window_management_buttons]
+        self.init_stylesheets(widgets_with_stylesheets)
+        
         self.setWindowTitle("Homie Web")
+    
+    def init_stylesheets(self, widgets):
+        for widget in widgets:
+            widget.hide()
+            widget_stylesheet = widget.styleSheet()
+            for key in self.THEME["colors"].keys():
+                widget_stylesheet = widget_stylesheet.replace('/' + key + '/', self.THEME["colors"][key])
+            widget.setStyleSheet(widget_stylesheet)
+            widget.show()
