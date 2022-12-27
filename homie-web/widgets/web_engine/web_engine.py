@@ -23,8 +23,8 @@ class WebEngineView(QWebEngineView):
     
     def createWindow(self, window_type: QWebEnginePage.WebWindowType) -> 'QWebEngineView':
         if window_type == QWebEnginePage.WebWindowType.WebBrowserTab:
-            return self.main_window.web_views.widget(self.main_window.new_web_view_tab())
+            return self.main_window.tab_widgets.widget(self.main_window.new_web_view_tab())
         elif window_type == QWebEnginePage.WebWindowType.WebBrowserBackgroundTab:
-            return self.main_window.web_views.widget(self.main_window.new_web_view_tab(background = True))
+            return self.main_window.tab_widgets.widget(self.main_window.new_web_view_tab(background = True))
         
         return super().createWindow(window_type)
