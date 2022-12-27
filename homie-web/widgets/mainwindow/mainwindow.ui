@@ -39,7 +39,7 @@
      <number>0</number>
     </property>
     <item>
-     <widget class="QWidget" name="navbar" native="true">
+     <widget class="QWidget" name="top_bar" native="true">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
         <horstretch>0</horstretch>
@@ -119,24 +119,24 @@ QTabBar::tab:selected {
         </widget>
        </item>
        <item>
-        <widget class="QWidget" name="main_bar" native="true">
+        <widget class="QWidget" name="nav_bar" native="true">
          <property name="styleSheet">
           <string notr="true">QWidget {
-	background-color: /main_bar_bg_color/;
+	background-color: /nav_bar_bg_color/;
 }
 QWidget {
 	border: 0px;
 }
 QPushButton {
 	background-color: rgba(21, 21, 21, 0);
-	color: /main_bar_accent_color/;
+	color: /nav_bar_accent_color/;
 	border: 0px;
 	font: 24px &quot;dripicons-v2&quot;;
 	margin: 2px;
 	padding: 2px;
 }
 QPushButton:hover {
-	background-color: /main_bar_hover_color/;
+	background-color: /nav_bar_hover_color/;
 	border-radius: 10px;
 }
 QPushButton:pressed {
@@ -153,13 +153,13 @@ QLineEdit {
 	margin-bottom: 3px;
 	margin-left: 1px;
 	margin-right: 1px;
-	border: 2px solid /main_bar_accent_color/;
+	border: 2px solid /nav_bar_accent_color/;
 }
 QLineEdit:hover {
-	background-color: /main_bar_hover_color/;
+	background-color: /nav_bar_hover_color/;
 }
 QLineEdit:focus {
-	background-color: /main_bar_focus_color/;
+	background-color: /nav_bar_focus_color/;
 }</string>
          </property>
          <layout class="QHBoxLayout" name="main_bar_layout">

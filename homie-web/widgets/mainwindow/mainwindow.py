@@ -14,10 +14,10 @@ themes = {
     "matte black": {
         "colors": {
             "bg_color": "rgb(35, 35, 35)",
-            "main_bar_bg_color": "rgb(21, 21, 21)",
-            "main_bar_accent_color": "rgb(255, 255, 255)",
-            "main_bar_hover_color": "rgba(202, 202, 202, 30)",
-            "main_bar_focus_color": "rgb(10, 10, 10)",
+            "nav_bar_bg_color": "rgb(21, 21, 21)",
+            "nav_bar_accent_color": "rgb(255, 255, 255)",
+            "nav_bar_hover_color": "rgba(202, 202, 202, 30)",
+            "nav_bar_focus_color": "rgb(10, 10, 10)",
             "url_bar_bg_color": "rgb(21, 21, 21)",
             "tab_bar_bg_color": "rgb(21, 21, 21)",
             "tab_bg_color": "rgb(21, 21, 21)",
@@ -25,16 +25,16 @@ themes = {
             "tab_font_color": "rgb(255, 255, 255)",
             "tab_hover_color": "rgba(202, 202, 202, 30)",
             "tab_focus_color": "rgb(10, 10, 10)",
-        },
+        },  
         "theme version": 1
     },
     "red": {
         "colors": {
             "bg_color": "rgb(255, 98, 98)",
-            "main_bar_bg_color": "rgb(255, 45, 45)",
-            "main_bar_accent_color": "rgb(255, 255, 255)",
-            "main_bar_hover_color": "rgba(255, 200, 200, 50)",
-            "main_bar_focus_color": "rgb(255, 69, 69)",
+            "nav_bar_bg_color": "rgb(255, 45, 45)",
+            "nav_bar_accent_color": "rgb(255, 255, 255)",
+            "nav_bar_hover_color": "rgba(255, 200, 200, 50)",
+            "nav_bar_focus_color": "rgb(255, 69, 69)",
             "url_bar_bg_color": "rgb(255, 45, 45)",
             "tab_bar_bg_color": "rgb(255, 69, 69)",
             "tab_bg_color": "rgb(255, 69, 69)",
@@ -78,7 +78,7 @@ class MainWindow(QMainWindow):
         
         self.main_layout.setSizes([0])
         
-        widgets_with_stylesheets = [self.centralwidget, self.navbar, self.main_bar, self.tab_bar, self.window_management_buttons]
+        widgets_with_stylesheets = [self.centralwidget, self.nav_bar, self.top_bar, self.tab_bar, self.window_management_buttons]
         self.init_stylesheets(widgets_with_stylesheets)
         
         self.setWindowTitle("Homie Web")
