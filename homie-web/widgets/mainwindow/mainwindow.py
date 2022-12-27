@@ -5,7 +5,7 @@ from PyQt5.QtCore import Qt, QUrl
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.uic import loadUi
 
-from ..tabs.tabs import Tabs
+from ..top_bar.tabs.tabs import Tabs
 from ..tab_widgets.tab_widgets import TabWidgets
 from ..window_management_buttons.window_management_buttons import WindowManagementButtons
 

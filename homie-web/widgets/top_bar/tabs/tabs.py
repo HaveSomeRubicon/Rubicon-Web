@@ -4,7 +4,7 @@ from PyQt5.QtCore import Qt, QUrl
 from PyQt5.QtWidgets import QTabBar, QSizePolicy
 from PyQt5.QtGui import QIcon
 
-from ..web_engine.web_engine import WebEngineView
+from ...web_engine.web_engine import WebEngineView
 
 
 class Tabs(QTabBar):
