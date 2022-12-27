@@ -7,7 +7,7 @@ from PyQt5.uic import loadUi
 
 from ..top_bar.tabs.tabs import Tabs
 from ..tab_widgets.tab_widgets import TabWidgets
-from ..window_management_buttons.window_management_buttons import WindowManagementButtons
+from ..top_bar.tabs.window_management_buttons.window_management_buttons import WindowManagementButtons
 
 
 themes = {
