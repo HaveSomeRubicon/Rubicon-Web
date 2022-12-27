@@ -78,6 +78,10 @@ class MainWindow(QMainWindow):
         self.default_tab = lambda: self.new_web_view_tab(self.default_qurl)
         self.default_tab()
         
+        self.back_button.clicked.connect(lambda: self.web_views.currentWidget().back())
+
+        self.forward_button.clicked.connect(lambda: self.web_views.currentWidget().forward())
+
         self.new_tab_button.clicked.connect(self.default_tab)
         
         self.main_layout.setSizes([0])
@@ -104,13 +108,21 @@ class MainWindow(QMainWindow):
             browser.setUrl(url)
         tab_index = self.new_tab(browser, "Loading...", background = background)
         
-        def browser_load_finished(browser):
+        def browser_load_started():
+            self.reload_and_stop_button.setText("9")
+            self.reload_and_stop_button.clicked.connect(lambda: self.web_views.currentWidget().stop())
+        
+        def browser_load_finished():
+            self.reload_and_stop_button.setText("Z")
+            self.reload_and_stop_button.clicked.connect(lambda: self.web_views.currentWidget().reload())
+            
             title = browser.page().title()
             icon = browser.page().icon()
             self.tabs.setTabText(tab_index, title)
             self.tabs.setTabIcon(tab_index, icon)
         
-        browser.loadFinished.connect(lambda: browser_load_finished(browser))
+        browser.loadProgress.connect(browser_load_started)
+        browser.loadFinished.connect(browser_load_finished)
         
         return tab_index
     
