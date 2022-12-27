@@ -53,7 +53,7 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__(*args, **kwargs)
         loadUi("homie-web/widgets/mainwindow/mainwindow.ui", self)
         
-        self.config = config
+        self.CONFIG = config
         
         self.THEME = themes["red"]
         
