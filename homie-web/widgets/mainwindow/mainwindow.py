@@ -7,6 +7,7 @@ from PyQt5.uic import loadUi
 
 from ..tabs.tabs import Tabs
 from ..tab_widgets.tab_widgets import TabWidgets
+from ..window_management_buttons.window_management_buttons import WindowManagementButtons
 
 
 themes = {
@@ -60,7 +61,10 @@ class MainWindow(QMainWindow):
         self.main_layout.addWidget(self.tab_widgets)
         
         self.tabs = Tabs(self)
-        self.tab_bar_layout.insertWidget(0, self.tabs)
+        self.tab_bar_layout.addWidget(self.tabs)
+        
+        self.window_management_buttons = WindowManagementButtons()
+        self.tab_bar_layout.addWidget(self.window_management_buttons)
         
         self.default_qurl = QUrl("https://ecosia.org/")
         self.default_tab = lambda: self.tabs.new_web_view_tab(self.default_qurl)
