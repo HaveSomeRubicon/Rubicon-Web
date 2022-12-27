@@ -1,14 +1,11 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <author></author>
- <comment></comment>
- <exportmacro></exportmacro>
- <class>Form</class>
- <widget class="QWidget" name="window_management_buttons" native="true">
+ <class>window_management_buttons</class>
+ <widget class="QWidget" name="window_management_buttons">
   <property name="geometry">
    <rect>
-    <x>513</x>
-    <y>4</y>
+    <x>0</x>
+    <y>0</y>
     <width>85</width>
     <height>23</height>
    </rect>
@@ -50,7 +47,7 @@
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>C:/Users/Mahdi/Desktop/Code/Homie-Web/homie-web/widgets/mainwindow/png/maximize button icon.png</normaloff>C:/Users/Mahdi/Desktop/Code/Homie-Web/homie-web/widgets/mainwindow/png/maximize button icon.png</iconset>
+       <normaloff>png/maximize button icon.png</normaloff>png/maximize button icon.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -67,7 +64,7 @@
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>C:/Users/Mahdi/Desktop/Code/Homie-Web/homie-web/widgets/mainwindow/png/minimize button icon.png</normaloff>C:/Users/Mahdi/Desktop/Code/Homie-Web/homie-web/widgets/mainwindow/png/minimize button icon.png</iconset>
+       <normaloff>png/minimize button icon.png</normaloff>png/minimize button icon.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -84,7 +81,7 @@
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>C:/Users/Mahdi/Desktop/Code/Homie-Web/homie-web/widgets/mainwindow/png/close button icon.png</normaloff>C:/Users/Mahdi/Desktop/Code/Homie-Web/homie-web/widgets/mainwindow/png/close button icon.png</iconset>
+       <normaloff>png/close button icon.png</normaloff>png/close button icon.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -96,6 +93,6 @@
    </item>
   </layout>
  </widget>
- <pixmapfunction></pixmapfunction>
+ <resources/>
  <connections/>
 </ui>
