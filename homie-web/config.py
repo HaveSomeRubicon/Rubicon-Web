@@ -1,3 +1,3 @@
 config = {
-    "theme": "red"
+    "theme": "matte black"
 }
