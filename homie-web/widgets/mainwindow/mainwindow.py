@@ -55,7 +55,7 @@ class MainWindow(QMainWindow):
         
         self.CONFIG = config
         
-        self.THEME = themes["red"]
+        self.THEME = themes[self.CONFIG["theme"]]
         
         self.tab_widgets = TabWidgets()
         self.main_layout.addWidget(self.tab_widgets)
