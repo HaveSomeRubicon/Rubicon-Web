@@ -51,7 +51,7 @@
 	border: 0px;
 }</string>
       </property>
-      <layout class="QVBoxLayout" name="navbar_layout">
+      <layout class="QVBoxLayout" name="top_bar_layout">
        <property name="spacing">
         <number>0</number>
        </property>
