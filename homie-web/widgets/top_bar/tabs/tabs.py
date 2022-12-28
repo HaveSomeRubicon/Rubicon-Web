@@ -8,10 +8,10 @@ from ...web_engine.web_engine import WebEngineView
 
 
 class Tabs(QTabBar):
-    def __init__(self, mainwindow, *args, **kwargs):
+    def __init__(self, main_window, *args, **kwargs):
         super(Tabs, self).__init__(*args, **kwargs)
         
-        self.mainwindow = mainwindow
+        self.mainwindow = main_window
         
         self.tab_widgets = self.mainwindow.tab_widgets
         
