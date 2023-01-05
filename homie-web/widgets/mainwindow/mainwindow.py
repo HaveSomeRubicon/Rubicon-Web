@@ -5,9 +5,8 @@ from PyQt5.QtCore import Qt, QUrl
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.uic import loadUi
 
-from ..top_bar.tabs.tabs import Tabs
+from ..top_bar.top_bar import TopBar
 from ..tab_widgets.tab_widgets import TabWidgets
-from ..top_bar.tabs.window_management_buttons.window_management_buttons import WindowManagementButtons
 
 
 themes = {
@@ -60,25 +59,22 @@ class MainWindow(QMainWindow):
         self.tab_widgets = TabWidgets()
         self.main_layout.addWidget(self.tab_widgets)
         
-        self.tabs = Tabs(self)
-        self.tab_bar_layout.addWidget(self.tabs)
+        self.top_bar = TopBar(self)
+        self.centralwidget_layout.insertWidget(0, self.top_bar)
         
-        self.window_management_buttons = WindowManagementButtons()
-        self.tab_bar_layout.addWidget(self.window_management_buttons)
+        widget = self.top_bar.nav_bar
+        widget_stylesheet = widget.styleSheet()
+        for key in self.THEME["colors"].keys():
+            widget_stylesheet = widget_stylesheet.replace('/' + key + '/', self.THEME["colors"][key])
+        widget.setStyleSheet(widget_stylesheet)
+        widget.update()
         
         self.default_qurl = QUrl("https://ecosia.org/")
-        self.default_tab = lambda: self.tabs.new_web_view_tab(self.default_qurl)
-        self.default_tab()
-        
-        self.back_button.clicked.connect(lambda: self.tab_widgets.currentWidget().back())
-
-        self.forward_button.clicked.connect(lambda: self.tab_widgets.currentWidget().forward())
-
-        self.new_tab_button.clicked.connect(self.default_tab)
+        self.top_bar.nav_bar.default_tab()
         
         self.main_layout.setSizes([0])
         
-        widgets_with_stylesheets = [self.centralwidget, self.nav_bar, self.top_bar, self.tab_bar, self.window_management_buttons]
+        widgets_with_stylesheets = [self.centralwidget, self.top_bar.nav_bar, self.top_bar, self.top_bar.tab_bar, self.top_bar.tab_bar.window_management_buttons]
         self.init_stylesheets(widgets_with_stylesheets)
         
         self.setWindowTitle("Homie Web")

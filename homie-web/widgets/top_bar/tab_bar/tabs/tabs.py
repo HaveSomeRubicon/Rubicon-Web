@@ -4,7 +4,7 @@ from PyQt5.QtCore import Qt, QUrl
 from PyQt5.QtWidgets import QTabBar, QSizePolicy
 from PyQt5.QtGui import QIcon
 
-from ...web_engine.web_engine import WebEngineView
+from ....web_engine.web_engine import WebEngineView
 
 
 class Tabs(QTabBar):
@@ -12,6 +12,8 @@ class Tabs(QTabBar):
         super(Tabs, self).__init__(*args, **kwargs)
         
         self.mainwindow = main_window
+        
+        self.setAttribute(Qt.WA_StyledBackground, True)
         
         self.tab_widgets = self.mainwindow.tab_widgets
         
@@ -53,12 +55,12 @@ class Tabs(QTabBar):
         tab_index = self.new_tab(browser, "Loading...", background = background)
         
         def browser_load_started():
-            self.mainwindow.reload_and_stop_button.setText("9")
-            self.mainwindow.reload_and_stop_button.clicked.connect(lambda: self.tab_widgets.currentWidget().stop())
+            self.mainwindow.top_bar.nav_bar.reload_and_stop_button.setText("9")
+            self.mainwindow.top_bar.nav_bar.reload_and_stop_button.clicked.connect(lambda: self.tab_widgets.currentWidget().stop())
         
         def browser_load_finished():
-            self.mainwindow.reload_and_stop_button.setText("Z")
-            self.mainwindow.reload_and_stop_button.clicked.connect(lambda: self.tab_widgets.currentWidget().reload())
+            self.mainwindow.top_bar.nav_bar.reload_and_stop_button.setText("Z")
+            self.mainwindow.top_bar.nav_bar.reload_and_stop_button.clicked.connect(lambda: self.tab_widgets.currentWidget().reload())
             
             title = browser.page().title()
             icon = browser.page().icon()
