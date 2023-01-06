@@ -1,5 +1,6 @@
 import os
 import sys
+from pathlib import PureWindowsPath, PurePosixPath
 
 from PyQt5.QtCore import Qt, QUrl
 from PyQt5.QtWidgets import QMainWindow
@@ -56,6 +57,9 @@ class MainWindow(QMainWindow):
         self.THEME = themes[self.CONFIG["theme"]]
         self.default_qurl = QUrl(self.CONFIG["default_url"])
         
+        self.relative_to_abs_path = lambda file_path: os.path.abspath(file_path)
+        self.nt_to_posix_path = lambda file_path: ''.join(str(PurePosixPath(PureWindowsPath(file_path))).split("\\")[1:])
+        
         self.tab_widgets = TabWidgets()
         self.main_layout.addWidget(self.tab_widgets)
         
@@ -75,7 +79,17 @@ class MainWindow(QMainWindow):
         for widget in widgets:
             widget.hide()
             widget_stylesheet = widget.styleSheet()
+            
             for key in self.THEME["colors"].keys():
                 widget_stylesheet = widget_stylesheet.replace('/' + key + '/', self.THEME["colors"][key])
-            widget.setStyleSheet(widget_stylesheet)
+
+            split_stylesheet = widget_stylesheet.split('*')
+            for index in range(1, len(split_stylesheet), 2):
+                file_path = self.relative_to_abs_path(split_stylesheet[index])
+                if os.name == 'nt':
+                    file_path = self.nt_to_posix_path(file_path)
+                split_stylesheet[index] = file_path
+                widget_stylesheet = ''.join(split_stylesheet)
+
             widget.show()
+            widget.setStyleSheet(widget_stylesheet)
