@@ -1,3 +1,4 @@
 config = {
-    "theme": "matte black"
+    "theme": "matte black",
+    "default_url": "https://ecosia.org/"
 }

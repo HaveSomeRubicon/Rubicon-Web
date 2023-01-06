@@ -53,8 +53,8 @@ class MainWindow(QMainWindow):
         loadUi("homie-web/widgets/mainwindow/mainwindow.ui", self)
         
         self.CONFIG = config
-        
         self.THEME = themes[self.CONFIG["theme"]]
+        self.default_qurl = QUrl(self.CONFIG["default_url"])
         
         self.tab_widgets = TabWidgets()
         self.main_layout.addWidget(self.tab_widgets)
@@ -69,7 +69,6 @@ class MainWindow(QMainWindow):
         widget.setStyleSheet(widget_stylesheet)
         widget.update()
         
-        self.default_qurl = QUrl("https://ecosia.org/")
         self.top_bar.nav_bar.default_tab()
         
         self.main_layout.setSizes([0])
