@@ -18,5 +18,6 @@ class TabBar(QWidget):
         self.tabs = Tabs(self.main_window)
         self.tab_bar_layout.addWidget(self.tabs)
         
-        self.window_management_buttons = WindowManagementButtons()
-        self.tab_bar_layout.addWidget(self.window_management_buttons)
+        if self.main_window.CONFIG["show_window_management_buttons"]:
+            self.window_management_buttons = WindowManagementButtons()
+            self.tab_bar_layout.addWidget(self.window_management_buttons)

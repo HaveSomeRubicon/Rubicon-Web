@@ -61,12 +61,12 @@ class MainWindow(QMainWindow):
         
         self.top_bar = TopBar(self)
         self.centralwidget_layout.insertWidget(0, self.top_bar)
-        
+
         self.top_bar.nav_bar.default_tab()
         
         self.main_layout.setSizes([0])
         
-        widgets_with_stylesheets = [self.centralwidget, self.top_bar.nav_bar, self.top_bar, self.top_bar.tab_bar, self.top_bar.tab_bar.window_management_buttons]
+        widgets_with_stylesheets = [self.centralwidget, self.top_bar.nav_bar, self.top_bar, self.top_bar.tab_bar]
         self.init_stylesheets(widgets_with_stylesheets)
         
         self.setWindowTitle("Homie Web")
