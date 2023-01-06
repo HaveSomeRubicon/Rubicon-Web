@@ -62,13 +62,6 @@ class MainWindow(QMainWindow):
         self.top_bar = TopBar(self)
         self.centralwidget_layout.insertWidget(0, self.top_bar)
         
-        widget = self.top_bar.nav_bar
-        widget_stylesheet = widget.styleSheet()
-        for key in self.THEME["colors"].keys():
-            widget_stylesheet = widget_stylesheet.replace('/' + key + '/', self.THEME["colors"][key])
-        widget.setStyleSheet(widget_stylesheet)
-        widget.update()
-        
         self.top_bar.nav_bar.default_tab()
         
         self.main_layout.setSizes([0])
