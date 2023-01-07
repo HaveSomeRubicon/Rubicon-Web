@@ -59,7 +59,7 @@ QLineEdit:focus {
 	background-color: /nav_bar_focus_color/;
 }</string>
   </property>
-  <layout class="QHBoxLayout" name="main_bar_layout">
+  <layout class="QHBoxLayout" name="nav_bar_layout">
    <property name="spacing">
     <number>0</number>
    </property>
