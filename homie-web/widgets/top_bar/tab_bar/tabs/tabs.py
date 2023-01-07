@@ -34,7 +34,7 @@ class Tabs(QTabBar):
         self.tab_widgets.removeWidget(moved_tab_widget)
         self.tab_widgets.insertWidget(to, moved_tab_widget)
 
-    def new_tab(self, widget, title: str = "Untitled tab", icon: QIcon = None, background: bool = True):
+    def new_tab(self, widget, title: str = "Untitled tab", url_bar_text: str = None, icon: QIcon = None, background: bool = True):
         if icon is not None:
             tab_index = self.addTab(icon, title)
         else:
@@ -46,12 +46,15 @@ class Tabs(QTabBar):
         
         self.tab_widgets.widget(tab_index).setAttribute(Qt.WA_DeleteOnClose, True)
         
+        if not url_bar_text == None:
+            self.mainwindow.top_bar.nav_bar.url_bar.update_text(url_bar_text)
+        
         return tab_index
 
-    def new_web_view_tab(self, url: QUrl = None, background: bool = False):
+    def new_web_view_tab(self, qurl: QUrl = None, background: bool = False):
         browser = WebEngineView(self.mainwindow)
-        if url != None:
-            browser.setUrl(url)
+        if qurl != None:
+            browser.setUrl(qurl)
         tab_index = self.new_tab(browser, "Loading...", background = background)
         
         def browser_load_started():
@@ -69,6 +72,7 @@ class Tabs(QTabBar):
         
         browser.loadProgress.connect(browser_load_started)
         browser.loadFinished.connect(browser_load_finished)
+        browser.urlChanged.connect(lambda qurl, browser=browser: self.mainwindow.top_bar.nav_bar.url_bar.update_url(qurl, browser))
         
         return tab_index
     
