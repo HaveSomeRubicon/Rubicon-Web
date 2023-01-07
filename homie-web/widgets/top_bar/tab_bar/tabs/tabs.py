@@ -11,11 +11,11 @@ class Tabs(QTabBar):
     def __init__(self, main_window, *args, **kwargs):
         super(Tabs, self).__init__(*args, **kwargs)
         
-        self.mainwindow = main_window
+        self.main_window = main_window
         
         self.setAttribute(Qt.WA_StyledBackground, True)
         
-        self.tab_widgets = self.mainwindow.tab_widgets
+        self.tab_widgets = self.main_window.tab_widgets
         
         self.setDrawBase(False)
         self.setMovable(True)
@@ -52,18 +52,18 @@ class Tabs(QTabBar):
         return tab_index
 
     def new_web_view_tab(self, qurl: QUrl = None, background: bool = False):
-        browser = WebEngineView(self.mainwindow)
+        browser = WebEngineView(self.main_window)
         if qurl != None:
             browser.setUrl(qurl)
         tab_index = self.new_tab(browser, "Loading...", background = background)
         
         def browser_load_started():
-            self.mainwindow.top_bar.nav_bar.reload_and_stop_button.setText("9")
-            self.mainwindow.top_bar.nav_bar.reload_and_stop_button.clicked.connect(lambda: self.tab_widgets.currentWidget().stop())
+            self.main_window.top_bar.nav_bar.reload_and_stop_button.setText("9")
+            self.main_window.top_bar.nav_bar.reload_and_stop_button.clicked.connect(lambda: self.tab_widgets.currentWidget().stop())
         
         def browser_load_finished():
-            self.mainwindow.top_bar.nav_bar.reload_and_stop_button.setText("Z")
-            self.mainwindow.top_bar.nav_bar.reload_and_stop_button.clicked.connect(lambda: self.tab_widgets.currentWidget().reload())
+            self.main_window.top_bar.nav_bar.reload_and_stop_button.setText("Z")
+            self.main_window.top_bar.nav_bar.reload_and_stop_button.clicked.connect(lambda: self.tab_widgets.currentWidget().reload())
             
             title = browser.page().title()
             icon = browser.page().icon()
@@ -72,7 +72,7 @@ class Tabs(QTabBar):
         
         browser.loadProgress.connect(browser_load_started)
         browser.loadFinished.connect(browser_load_finished)
-        browser.urlChanged.connect(lambda qurl, browser=browser: self.mainwindow.top_bar.nav_bar.url_bar.update_url(qurl, browser))
+        browser.urlChanged.connect(lambda qurl, browser=browser: self.main_window.top_bar.nav_bar.url_bar.update_url(qurl, browser))
         
         return tab_index
     
