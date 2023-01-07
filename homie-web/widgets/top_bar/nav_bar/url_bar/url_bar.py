@@ -1,3 +1,7 @@
+import os
+import urllib.parse
+import validators
+
 from PyQt5.QtCore import QUrl
 from PyQt5.QtWidgets import QLineEdit, QSizePolicy
 from PyQt5.QtWebEngineWidgets import QWebEngineView
@@ -24,8 +28,18 @@ class UrlBar(QLineEdit):
             self.setCursorPosition(0)
     
     def change_url(self):
-        self.main_window.tab_widgets.currentWidget().setUrl(QUrl(self.text()))
-    
+        url = self.text().strip()
+        
+        if validators.url(QUrl.fromUserInput(url).toString()):
+            qurl = QUrl.fromUserInput(url)
+        elif os.path.exists(url):
+            qurl = QUrl.fromLocalFile(url)
+        else:
+            qurl = QUrl(f"https://www.ecosia.org/search?q={urllib.parse.quote(url)}")
+        
+        self.main_window.tab_widgets.currentWidget().setFocus(True)
+        self.main_window.tab_widgets.currentWidget().setUrl(qurl)
+
     def selectAll(self) -> None:
         self.selected = True
         return super().selectAll()
