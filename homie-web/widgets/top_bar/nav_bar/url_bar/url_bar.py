@@ -22,12 +22,10 @@ class UrlBar(QLineEdit):
     
     def mousePressEvent(self, event) -> None:
         super(UrlBar, self).mousePressEvent(event)
-        print("MousePressEvent" + str(self.focused))
         if self.focused == False:
             self.selectAll()
             self.focused = True
     
     def focusOutEvent(self, event) -> None:
         super(UrlBar, self).focusOutEvent(event)
-        print("FocusOutEvent" + str(self.focused))
         self.focused = False
