@@ -46,16 +46,19 @@ class Tabs(QTabBar):
         
         self.tab_widgets.widget(tab_index).setAttribute(Qt.WA_DeleteOnClose, True)
         
-        if not url_bar_text == None:
-            self.mainwindow.top_bar.nav_bar.url_bar.update_text(url_bar_text)
-        
         return tab_index
 
     def new_web_view_tab(self, qurl: QUrl = None, background: bool = False):
         browser = WebEngineView(self.main_window)
         if qurl != None:
             browser.setUrl(qurl)
-        tab_index = self.new_tab(browser, "Loading...", background = background)
+        tab_index = self.addTab("Loading...")
+        self.tab_widgets.addWidget(browser)
+        
+        if not background:
+            self.setCurrentIndex(tab_index)
+        
+        self.tab_widgets.widget(tab_index).setAttribute(Qt.WA_DeleteOnClose, True)
         
         def browser_load_started():
             self.main_window.top_bar.nav_bar.reload_and_stop_button.setText("9")
