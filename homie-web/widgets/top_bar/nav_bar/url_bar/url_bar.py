@@ -11,14 +11,19 @@ class UrlBar(QLineEdit):
         
         self.main_window = main_window
         
-        self.focused = False
-        
         self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
         self.setPlaceholderText("Search or type a URL")
+        
+        self.focused = False
+
+        self.returnPressed.connect(self.change_url)
     
     def update_url(self, qurl: QUrl, browser: WebEngineView or QWebEngineView):
         if browser == self.main_window.tab_widgets.currentWidget():
             self.setText(qurl.toString())
+    
+    def change_url(self):
+        self.main_window.tab_widgets.currentWidget().setUrl(QUrl(self.text()))
     
     def mousePressEvent(self, event) -> None:
         super(UrlBar, self).mousePressEvent(event)
