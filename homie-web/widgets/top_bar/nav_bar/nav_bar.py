@@ -13,7 +13,7 @@ class NavBar(QWidget):
         self.main_window = main_window
         self.setAttribute(Qt.WA_StyledBackground, True)
         
-        self.url_bar = UrlBar()
+        self.url_bar = UrlBar(self.main_window)
         self.nav_bar_layout.insertWidget(3, self.url_bar)
         
         self.default_tab = lambda: self.main_window.top_bar.tab_bar.tabs.new_web_view_tab(self.main_window.default_qurl)
