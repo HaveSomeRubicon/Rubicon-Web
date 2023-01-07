@@ -21,6 +21,7 @@ class UrlBar(QLineEdit):
     def update_url(self, qurl: QUrl, browser: WebEngineView or QWebEngineView):
         if browser == self.main_window.tab_widgets.currentWidget():
             self.setText(qurl.toString())
+            self.setCursorPosition(0)
     
     def change_url(self):
         self.main_window.tab_widgets.currentWidget().setUrl(QUrl(self.text()))
