@@ -14,7 +14,7 @@ class UrlBar(QLineEdit):
         self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
         self.setPlaceholderText("Search or type a URL")
         
-        self.focused = False
+        self.selected = False
 
         self.returnPressed.connect(self.change_url)
     
@@ -25,12 +25,19 @@ class UrlBar(QLineEdit):
     def change_url(self):
         self.main_window.tab_widgets.currentWidget().setUrl(QUrl(self.text()))
     
+    def selectAll(self) -> None:
+        self.selected = True
+        return super().selectAll()
+    
+    def deselect(self) -> None:
+        self.selected = False
+        return super().deselect()
+    
     def mousePressEvent(self, event) -> None:
         super(UrlBar, self).mousePressEvent(event)
-        if self.focused == False:
+        if self.selected == False:
             self.selectAll()
-            self.focused = True
     
     def focusOutEvent(self, event) -> None:
         super(UrlBar, self).focusOutEvent(event)
-        self.focused = False
+        self.deselect()
