@@ -51,7 +51,7 @@ themes = {
 class MainWindow(QMainWindow):
     def __init__(self, config, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
-        loadUi("homie-web/widgets/mainwindow/mainwindow.ui", self)
+        loadUi("rubicon-web/widgets/mainwindow/mainwindow.ui", self)
         
         self.CONFIG = config
         self.THEME = themes[self.CONFIG["theme"]]
@@ -73,7 +73,7 @@ class MainWindow(QMainWindow):
         widgets_with_stylesheets = [self.centralwidget, self.top_bar.nav_bar, self.top_bar, self.top_bar.tab_bar]
         self.init_stylesheets(widgets_with_stylesheets)
         
-        self.setWindowTitle("Homie Web")
+        self.setWindowTitle("Rubicon Web")
     
     def init_stylesheets(self, widgets):
         for widget in widgets:

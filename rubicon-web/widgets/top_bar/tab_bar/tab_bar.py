@@ -9,7 +9,7 @@ from widgets.top_bar.tab_bar.window_management_buttons.window_management_buttons
 class TabBar(QWidget):
     def __init__(self, main_window, *args, **kwargs):
         super(TabBar, self).__init__(*args, **kwargs)
-        loadUi("homie-web/widgets/top_bar/tab_bar/tab_bar.ui", self)
+        loadUi("rubicon-web/widgets/top_bar/tab_bar/tab_bar.ui", self)
         
         self.main_window = main_window
 
