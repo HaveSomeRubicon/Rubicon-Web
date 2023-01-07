@@ -13,6 +13,9 @@ class WebEnginePage(QWebEnginePage):
 
         return super().triggerAction(action, checked)
 
+    def javaScriptConsoleMessage(self, level, message, lineNumber, sourceID):
+        pass
+
 
 class WebEngineView(QWebEngineView):
     def __init__(self, main_window, parent=None, *args, **kwargs):
