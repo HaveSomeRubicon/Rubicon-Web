@@ -20,7 +20,7 @@ class UrlBar(QLineEdit):
         self.setText(text)
     
     def update_url(self, qurl: QUrl, browser: WebEngineView or QWebEngineView):
-        if browser == self.main_window.tab_widgets.widget(self.main_window.top_bar.tab_bar.tabs.currentIndex()):
+        if browser == self.main_window.tab_widgets.currentWidget():
             self.update_text(qurl.toString())
     
     def mousePressEvent(self, event) -> None:
