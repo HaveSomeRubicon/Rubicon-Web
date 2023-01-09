@@ -18,8 +18,8 @@ config_file_path = os.path.join(user_config_dir, "config.py")
 def check_for_config():
     if not os.path.exists(user_config_dir):
         os.makedirs(user_config_dir)
-        with open(config_file_path, "w") as config_file:
-            config_file.write(str(default_config))
+    with open(config_file_path, "w") as config_file:
+        config_file.write(str(default_config))
 
 
 def get_config():
