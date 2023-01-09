@@ -35,7 +35,7 @@ class UrlBar(QLineEdit):
         elif os.path.exists(url):
             qurl = QUrl.fromLocalFile(url)
         else:
-            qurl = QUrl(f"https://www.ecosia.org/search?q={urllib.parse.quote(url)}")
+            qurl = QUrl(self.main_window.CONFIG["search_url"].replace("%s", url))
         
         self.main_window.tab_widgets.currentWidget().setFocus(True)
         self.main_window.tab_widgets.currentWidget().setUrl(qurl)

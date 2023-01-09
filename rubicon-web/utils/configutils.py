@@ -4,6 +4,7 @@ import os
 default_config = {
     "theme": "matte black",
     "default_url": "https://ecosia.org/",
+    "search_url": "https://www.ecosia.org/search?q=%s",
     "show_window_management_buttons": False,
 }
 
