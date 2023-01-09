@@ -10,46 +10,8 @@ from ..top_bar.top_bar import TopBar
 from ..tab_widgets.tab_widgets import TabWidgets
 
 
-themes = {
-    "matte black": {
-        "colors": {
-            "bg_color": "rgb(35, 35, 35)",
-            "nav_bar_bg_color": "rgb(21, 21, 21)",
-            "nav_bar_accent_color": "rgb(255, 255, 255)",
-            "nav_bar_hover_color": "rgba(202, 202, 202, 30)",
-            "nav_bar_focus_color": "rgb(10, 10, 10)",
-            "url_bar_bg_color": "rgb(21, 21, 21)",
-            "tab_bar_bg_color": "rgb(21, 21, 21)",
-            "tab_bg_color": "rgb(21, 21, 21)",
-            "tab_bar_accent_color": "rgb(255, 255, 255)",
-            "tab_font_color": "rgb(255, 255, 255)",
-            "tab_hover_color": "rgba(202, 202, 202, 30)",
-            "tab_focus_color": "rgb(10, 10, 10)",
-        },  
-        "theme version": 1
-    },
-    "red": {
-        "colors": {
-            "bg_color": "rgb(255, 98, 98)",
-            "nav_bar_bg_color": "rgb(255, 45, 45)",
-            "nav_bar_accent_color": "rgb(255, 255, 255)",
-            "nav_bar_hover_color": "rgba(255, 200, 200, 50)",
-            "nav_bar_focus_color": "rgb(255, 69, 69)",
-            "url_bar_bg_color": "rgb(255, 45, 45)",
-            "tab_bar_bg_color": "rgb(255, 69, 69)",
-            "tab_bg_color": "rgb(255, 69, 69)",
-            "tab_bar_accent_color": "rgb(255, 255, 255)",
-            "tab_font_color": "rgb(255, 255, 255)",
-            "tab_hover_color": "rgba(255, 200, 200, 50)",
-            "tab_focus_color": "rgb(255, 45, 45)",
-        },
-        "theme version": 1
-    }
-}
-
-
 class MainWindow(QMainWindow):
-    def __init__(self, config, *args, **kwargs):
+    def __init__(self, config, themes, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
         loadUi("rubicon-web/widgets/mainwindow/mainwindow.ui", self)
         
