@@ -13,7 +13,7 @@ from ..tab_widgets.tab_widgets import TabWidgets
 class MainWindow(QMainWindow):
     def __init__(self, config, themes, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
-        loadUi("rubicon-web/widgets/mainwindow/mainwindow.ui", self)
+        loadUi("rubicon_web/widgets/mainwindow/mainwindow.ui", self)
         
         self.CONFIG = config
         self.THEME = themes[self.CONFIG["theme"]]

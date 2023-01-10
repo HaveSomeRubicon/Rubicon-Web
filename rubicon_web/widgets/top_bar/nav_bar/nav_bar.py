@@ -8,7 +8,7 @@ from widgets.top_bar.nav_bar.url_bar.url_bar import UrlBar
 class NavBar(QWidget):
     def __init__(self, main_window, *args, **kwargs):
         super(NavBar, self).__init__(*args, **kwargs)
-        loadUi("rubicon-web/widgets/top_bar/nav_bar/nav_bar.ui", self)
+        loadUi("rubicon_web/widgets/top_bar/nav_bar/nav_bar.ui", self)
         
         self.main_window = main_window
         self.setAttribute(Qt.WA_StyledBackground, True)
