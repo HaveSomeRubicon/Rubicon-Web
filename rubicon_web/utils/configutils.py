@@ -6,6 +6,7 @@ default_config = {
     "default_url": "https://ecosia.org/",
     "search_url": "https://www.ecosia.org/search?q=%s",
     "show_window_management_buttons": False,
+    "config_version": "1",
 }
 
 if os.name == "nt":
