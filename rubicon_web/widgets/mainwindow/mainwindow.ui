@@ -49,6 +49,9 @@
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
+      <property name="handleWidth">
+       <number>0</number>
+      </property>
       <widget class="QTreeWidget" name="bookmarks_sidebar">
        <property name="enabled">
         <bool>true</bool>
