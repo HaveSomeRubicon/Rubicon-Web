@@ -60,23 +60,6 @@ class Tabs(QTabBar):
         
         self.tab_widgets.widget(tab_index).setAttribute(Qt.WA_DeleteOnClose, True)
         
-        def browser_load_started():
-            self.main_window.top_bar.nav_bar.reload_and_stop_button.setText("9")
-            self.main_window.top_bar.nav_bar.reload_and_stop_button.clicked.connect(lambda: self.tab_widgets.currentWidget().stop())
-        
-        def browser_load_finished():
-            self.main_window.top_bar.nav_bar.reload_and_stop_button.setText("Z")
-            self.main_window.top_bar.nav_bar.reload_and_stop_button.clicked.connect(lambda: self.tab_widgets.currentWidget().reload())
-            
-            title = browser.page().title()
-            icon = browser.page().icon()
-            self.setTabText(tab_index, title)
-            self.setTabIcon(tab_index, icon)
-        
-        browser.loadProgress.connect(browser_load_started)
-        browser.loadFinished.connect(browser_load_finished)
-        browser.urlChanged.connect(lambda qurl, browser=browser: self.main_window.top_bar.nav_bar.url_bar.update_url(qurl, browser))
-        
         return tab_index
     
     def close_tab(self, tab_index):
