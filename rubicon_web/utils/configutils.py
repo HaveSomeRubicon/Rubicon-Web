@@ -72,7 +72,7 @@ def check_for_theme():
         theme_file.write(str(default_themes))
 
 
-def get_theme():
+def get_themes():
     check_for_theme()
     with open(theme_file_path, "r") as theme_file:
         return eval(theme_file.read())
