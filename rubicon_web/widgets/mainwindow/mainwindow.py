@@ -11,12 +11,13 @@ from ..tab_widgets.tab_widgets import TabWidgets
 
 
 class MainWindow(QMainWindow):
-    def __init__(self, config, themes, *args, **kwargs):
+    def __init__(self, configutils, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
         loadUi("rubicon_web/widgets/mainwindow/mainwindow.ui", self)
         
-        self.CONFIG = config
-        self.THEME = themes[self.CONFIG["theme"]]
+        self.profile_dir = configutils.profile_dir
+        self.CONFIG = configutils.get_config()
+        self.THEME = configutils.get_themes()[self.CONFIG["theme"]]
         self.default_qurl = QUrl(self.CONFIG["default_url"])
         
         self.relative_to_abs_path = lambda file_path: os.path.abspath(file_path)
