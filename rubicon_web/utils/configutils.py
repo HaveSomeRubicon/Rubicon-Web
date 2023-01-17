@@ -48,7 +48,7 @@ default_themes = {
 if os.name == "nt":
     profile_dir = f"C:\\Users\\{os.getlogin()}\\.HaveSomeRubicon\\Rubicon-Web"
 else:
-    profile_dir = f"/home/{os.getlogin()}/.config/Rubicon-Web/"
+    profile_dir = f"/home/{os.getlogin()}/.config/Rubicon-Web"
 config_file_path = os.path.join(profile_dir, "config.py")
 theme_file_path = os.path.join(profile_dir, "theme.py")
 
