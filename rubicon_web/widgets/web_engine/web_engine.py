@@ -2,10 +2,9 @@ from PyQt5.QtWebEngineWidgets import QWebEnginePage, QWebEngineView
 
 
 class WebEnginePage(QWebEnginePage):
-    def __init__(self, parent=None, *args, **kwargs):
-        super(WebEnginePage, self).__init__(parent, *args, **kwargs)
-        
-        self.parent = parent
+    def __init__(self, main_window, *args, **kwargs):
+        super(WebEnginePage, self).__init__(*args, **kwargs)
+        self.main_window = main_window
 
     def triggerAction(self, action: 'QWebEnginePage.WebAction', checked: bool = False) -> None:
         if action == QWebEnginePage.OpenLinkInNewWindow:
@@ -22,7 +21,7 @@ class WebEngineView(QWebEngineView):
         super().__init__(parent, *args, **kwargs)
         self.main_window = main_window
         
-        self.setPage(WebEnginePage(self))
+        self.setPage(WebEnginePage(self.main_window))
     
     def createWindow(self, window_type: QWebEnginePage.WebWindowType) -> 'QWebEngineView':
         if window_type == QWebEnginePage.WebWindowType.WebBrowserTab:
