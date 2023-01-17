@@ -49,6 +49,7 @@ if os.name == "nt":
     profile_dir = f"C:\\Users\\{os.getlogin()}\\.HaveSomeRubicon\\Rubicon-Web"
 else:
     profile_dir = f"/home/{os.getlogin()}/.config/Rubicon-Web"
+web_engine_profile_dirs = {key: (profile_dir + ("\\WebEngineView\\" if os.name == "nt" else "/WebEngineView/") + value) for key, value in {"cachePath": "cache", "persistentStoragePath": "persistentStorage"}.items()}
 config_file_path = os.path.join(profile_dir, "config.py")
 theme_file_path = os.path.join(profile_dir, "theme.py")
 
@@ -76,3 +77,19 @@ def get_themes():
     check_for_theme()
     with open(theme_file_path, "r") as theme_file:
         return eval(theme_file.read())
+
+
+def check_for_web_engine_dirs():
+    for web_engine_dir in web_engine_profile_dirs.values():
+        if not os.path.exists(web_engine_dir):
+            os.makedirs(web_engine_dir)
+
+
+def get_cache_dir():
+    check_for_web_engine_dirs()
+    return web_engine_profile_dirs["cachePath"]
+
+
+def get_persistent_storage_dir():
+    check_for_web_engine_dirs()
+    return web_engine_profile_dirs["persistentStoragePath"]
