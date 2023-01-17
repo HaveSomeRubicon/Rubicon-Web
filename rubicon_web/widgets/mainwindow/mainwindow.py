@@ -15,6 +15,7 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__(*args, **kwargs)
         loadUi("rubicon_web/widgets/mainwindow/mainwindow.ui", self)
         
+        self.configutils = configutils
         self.profile_dir = configutils.profile_dir
         self.CONFIG = configutils.get_config()
         self.THEME = configutils.get_themes()[self.CONFIG["theme"]]
