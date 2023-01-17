@@ -34,20 +34,6 @@ class Tabs(QTabBar):
         self.tab_widgets.removeWidget(moved_tab_widget)
         self.tab_widgets.insertWidget(to, moved_tab_widget)
 
-    def new_tab(self, widget, title: str = "Untitled tab", url_bar_text: str = None, icon: QIcon = None, background: bool = True):
-        if icon is not None:
-            tab_index = self.addTab(icon, title)
-        else:
-            tab_index = self.addTab(title)
-        self.tab_widgets.addWidget(widget)
-        
-        if not background:
-            self.setCurrentIndex(tab_index)
-        
-        self.tab_widgets.widget(tab_index).setAttribute(Qt.WA_DeleteOnClose, True)
-        
-        return tab_index
-
     def new_web_view_tab(self, qurl: QUrl = None, background: bool = False):
         browser = WebEngineView(self.main_window)
         if qurl != None:
