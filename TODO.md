@@ -16,6 +16,6 @@
 - [ ] Add keyboard shortcuts to everything
 - [ ] Add a theme option to change to bar font and change the default font
 - [ ] Add a theme option to change font size
-- [ ] Fix reload and stop button changing icons when tabs other than the current one are reloading
 # COMPLETED
 - [X] Update URL bar when tab is changed
+- [X] Fix reload and stop button changing icons when tabs other than the current one are reloading

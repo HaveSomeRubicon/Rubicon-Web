@@ -36,8 +36,9 @@ class WebEngineView(QWebEngineView):
         return super().createWindow(window_type)
     
     def load_started(self):
-        self.main_window.top_bar.nav_bar.reload_and_stop_button.setText("9")
-        self.main_window.top_bar.nav_bar.reload_and_stop_button.clicked.connect(lambda: self.tab_widgets.currentWidget().stop())
+        if self == self.main_window.tab_widgets.currentWidget():
+            self.main_window.top_bar.nav_bar.reload_and_stop_button.setText("9")
+            self.main_window.top_bar.nav_bar.reload_and_stop_button.clicked.connect(lambda: self.tab_widgets.currentWidget().stop())
     
     def load_finished(self):
         tab_index = self.main_window.tab_widgets.indexOf(self)
