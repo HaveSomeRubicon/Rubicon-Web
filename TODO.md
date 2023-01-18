@@ -4,7 +4,6 @@
 - [ ] Open confirmation dialog when closing last tab
 - [ ] Add autocompletion to URL bar
 - [ ] Add more themeing options
-- [ ] Update URL bar when tab is changed
 - [ ] Add a hamburger menu to the navigation bar
 - [ ] Add a settings menu
 - [ ] Add a downloads menu
@@ -17,5 +16,6 @@
 - [ ] Add keyboard shortcuts to everything
 - [ ] Add a theme option to change to bar font and change the default font
 - [ ] Add a theme option to change font size
+- [ ] Fix reload and stop button changing icons when tabs other than the current one are reloading
 # COMPLETED
-No completed tasks yet:/
+- [X] Update URL bar when tab is changed
