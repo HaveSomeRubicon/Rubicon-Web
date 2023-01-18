@@ -20,7 +20,7 @@ class Tabs(QTabBar):
         self.setDrawBase(False)
         self.setMovable(True)
         self.setTabsClosable(True)
-        self.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Preferred)
+        self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
 
         self.tabCloseRequested.connect(self.close_tab)
         self.currentChanged.connect(self.tab_changed)
