@@ -38,13 +38,13 @@ class WebEngineView(QWebEngineView):
     def load_started(self):
         if self == self.main_window.tab_widgets.currentWidget():
             self.main_window.top_bar.nav_bar.reload_and_stop_button.setText("9")
-            self.main_window.top_bar.nav_bar.reload_and_stop_button.clicked.connect(lambda: self.tab_widgets.currentWidget().stop())
+            self.main_window.top_bar.nav_bar.reload_and_stop_button.clicked.connect(lambda: self.main_window.tab_widgets.currentWidget().stop())
     
     def load_finished(self):
         tab_index = self.main_window.tab_widgets.indexOf(self)
         
         self.main_window.top_bar.nav_bar.reload_and_stop_button.setText("Z")
-        self.main_window.top_bar.nav_bar.reload_and_stop_button.clicked.connect(lambda: self.tab_widgets.currentWidget().reload())
+        self.main_window.top_bar.nav_bar.reload_and_stop_button.clicked.connect(lambda: self.main_window.tab_widgets.currentWidget().reload())
         
         title = self.page().title()
         icon = self.page().icon()
