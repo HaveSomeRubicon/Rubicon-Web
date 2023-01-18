@@ -28,6 +28,9 @@ class Tabs(QTabBar):
 
     def tab_changed(self, tab_index):
         self.tab_widgets.setCurrentIndex(tab_index)
+        if not self.main_window.tab_widgets.count() < 1:
+            current_web_view = self.tab_widgets.currentWidget()
+            self.main_window.top_bar.nav_bar.url_bar.update_url(current_web_view.url(), current_web_view)
     
     def tab_moved(self, to, _from):
         moved_tab_widget = self.tab_widgets.widget(_from)
