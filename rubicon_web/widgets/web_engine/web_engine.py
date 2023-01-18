@@ -23,7 +23,7 @@ class WebEngineView(QWebEngineView):
 
         self.loadProgress.connect(self.load_started)
         self.loadFinished.connect(self.load_finished)
-        self.urlChanged.connect(lambda qurl: self.main_window.top_bar.nav_bar.url_bar.update_url(qurl, self))
+        self.urlChanged.connect(self.url_changed)
         
         self.setPage(WebEnginePage(self.main_window))
     
@@ -49,3 +49,8 @@ class WebEngineView(QWebEngineView):
         icon = self.page().icon()
         self.main_window.top_bar.tab_bar.tabs.setTabText(tab_index, title)
         self.main_window.top_bar.tab_bar.tabs.setTabIcon(tab_index, icon)
+    
+    def url_changed(self, qurl):
+        if not self.main_window.tab_widgets.count() < 1:
+            if self == self.main_window.tab_widgets.currentWidget():
+                self.main_window.top_bar.nav_bar.url_bar.update_url(qurl, self)
