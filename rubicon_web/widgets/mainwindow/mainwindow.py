@@ -11,17 +11,18 @@ from ..tab_widgets.tab_widgets import TabWidgets
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
-    def __init__(self, configutils, *args, **kwargs):
+    def __init__(self, configutils, app_dir, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
         self.setupUi(self)
         
         self.configutils = configutils
+        self.app_dir = app_dir
         self.profile_dir = configutils.profile_dir
         self.CONFIG = configutils.get_config()
         self.THEME = configutils.get_themes()[self.CONFIG["theme"]]
         self.default_qurl = QUrl(self.CONFIG["default_url"])
-        
-        self.relative_to_abs_path = lambda file_path: os.path.abspath(file_path)
+
+        self.relative_to_abs_path = lambda file_path: os.path.join(self.app_dir, file_path)
         self.nt_to_posix_path = lambda file_path: ''.join(str(PurePosixPath(PureWindowsPath(file_path))).split("\\")[1:])
         
         self.tab_widgets = TabWidgets()

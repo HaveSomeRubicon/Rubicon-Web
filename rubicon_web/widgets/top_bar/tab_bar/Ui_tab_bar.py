@@ -43,7 +43,7 @@ class Ui_tab_bar(object):
 "    background: /tab_focus_color/;\n"
 "}\n"
 "QTabBar::close-button {\n"
-"    image: url(*rubicon_web/widgets/top_bar/tab_bar/tabs/svg/close tab button icon.svg*);\n"
+"    image: url(*widgets/top_bar/tab_bar/tabs/svg/close tab button icon.svg*);\n"
 "}")
         self.tab_bar_layout = QtWidgets.QHBoxLayout(tab_bar)
         self.tab_bar_layout.setContentsMargins(2, 4, 2, 2)
