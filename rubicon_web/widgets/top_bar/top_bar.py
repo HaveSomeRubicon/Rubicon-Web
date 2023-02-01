@@ -1,5 +1,4 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QSizePolicy
-from PyQt5.uic import loadUi
 
 from widgets.top_bar.tab_bar.tab_bar import TabBar
 from widgets.top_bar.nav_bar.nav_bar import NavBar

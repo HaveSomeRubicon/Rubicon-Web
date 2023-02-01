@@ -1,6 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QHBoxLayout
 from PyQt5.QtCore import Qt
-from PyQt5.uic import loadUi
 
 from widgets.top_bar.tab_bar.Ui_tab_bar import Ui_tab_bar
 from widgets.top_bar.tab_bar.tabs.tabs import Tabs

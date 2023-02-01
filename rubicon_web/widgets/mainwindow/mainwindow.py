@@ -4,7 +4,6 @@ from pathlib import PureWindowsPath, PurePosixPath
 
 from PyQt5.QtCore import Qt, QUrl
 from PyQt5.QtWidgets import QMainWindow
-from PyQt5.uic import loadUi
 
 from ..mainwindow.Ui_mainwindow import Ui_MainWindow
 from ..top_bar.top_bar import TopBar
