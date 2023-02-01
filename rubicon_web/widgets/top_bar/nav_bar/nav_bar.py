@@ -2,13 +2,14 @@ from PyQt5.QtWidgets import QWidget
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import Qt
 
+from widgets.top_bar.nav_bar.Ui_nav_bar import Ui_nav_bar
 from widgets.top_bar.nav_bar.url_bar.url_bar import UrlBar
 
 
-class NavBar(QWidget):
+class NavBar(QWidget, Ui_nav_bar):
     def __init__(self, main_window, *args, **kwargs):
         super(NavBar, self).__init__(*args, **kwargs)
-        loadUi("rubicon_web/widgets/top_bar/nav_bar/nav_bar.ui", self)
+        self.setupUi(self)
         
         self.main_window = main_window
         self.setAttribute(Qt.WA_StyledBackground, True)

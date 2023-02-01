@@ -1,6 +1,8 @@
 from PyQt5.QtWidgets import QWidget
 from PyQt5.uic import loadUi
 
+from widgets.top_bar.tab_bar.window_management_buttons.Ui_window_management_buttons import Ui_window_management_buttons
+
 
 class WindowManagementButtons(QWidget):
     def __init__(self, *args, **kwargs):

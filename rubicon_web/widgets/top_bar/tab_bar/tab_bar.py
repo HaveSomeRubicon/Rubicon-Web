@@ -2,14 +2,15 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout
 from PyQt5.QtCore import Qt
 from PyQt5.uic import loadUi
 
+from widgets.top_bar.tab_bar.Ui_tab_bar import Ui_tab_bar
 from widgets.top_bar.tab_bar.tabs.tabs import Tabs
 from widgets.top_bar.tab_bar.window_management_buttons.window_management_buttons import WindowManagementButtons
 
 
-class TabBar(QWidget):
+class TabBar(QWidget, Ui_tab_bar):
     def __init__(self, main_window, *args, **kwargs):
         super(TabBar, self).__init__(*args, **kwargs)
-        loadUi("rubicon_web/widgets/top_bar/tab_bar/tab_bar.ui", self)
+        self.setupUi(self)
         
         self.main_window = main_window
 

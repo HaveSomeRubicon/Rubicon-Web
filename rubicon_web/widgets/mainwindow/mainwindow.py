@@ -6,14 +6,15 @@ from PyQt5.QtCore import Qt, QUrl
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.uic import loadUi
 
+from ..mainwindow.Ui_mainwindow import Ui_MainWindow
 from ..top_bar.top_bar import TopBar
 from ..tab_widgets.tab_widgets import TabWidgets
 
 
-class MainWindow(QMainWindow):
+class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, configutils, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
-        loadUi("rubicon_web/widgets/mainwindow/mainwindow.ui", self)
+        self.setupUi(self)
         
         self.configutils = configutils
         self.profile_dir = configutils.profile_dir
