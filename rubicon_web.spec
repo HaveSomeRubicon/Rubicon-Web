@@ -9,10 +9,10 @@ block_cipher = None
 
 
 a = Analysis(
-    ['D:/Code/Rubicon-Web/rubicon_web/rubicon_web.py'],
+    ['rubicon_web/rubicon_web.py'],
     pathex=[],
     binaries=[],
-    datas=[('D:/Code/Rubicon-Web/rubicon_web/widgets', 'widgets/'), ('D:/Code/Rubicon-Web/rubicon_web/utils', 'utils/')],
+    datas=[('rubicon_web/widgets', 'widgets/'), ('rubicon_web/utils', 'utils/')],
     hiddenimports=hiddenimports,
     hookspath=[],
     hooksconfig={},
