@@ -1,5 +1,4 @@
 # TODO
-- [ ] Fix tab titles applying to the wrong tabs
 - [ ] Add Ad Blocking
 - [ ] Open confirmation dialog when closing last tab
 - [ ] Add autocompletion to URL bar
@@ -11,11 +10,12 @@
 - [ ] Add more themes
 - [ ] Add theme selection menu
 - [ ] Implement more web window types
-- [ ] Use auto-py-to-exe to package this project
 - [ ] Convert all the navigation bar buttons from QPushButton to QAction
 - [ ] Add keyboard shortcuts to everything
-- [ ] Add a theme option to change to bar font and change the default font
+- [ ] Add a theme option to change top bar font and change the default font
 - [ ] Add a theme option to change font size
 # COMPLETED
 - [X] Update URL bar when tab is changed
 - [X] Fix reload and stop button changing icons when tabs other than the current one are reloading
+- [X] Fix tab titles applying to the wrong tabs
+- [X] Use auto-py-to-exe to package this project
