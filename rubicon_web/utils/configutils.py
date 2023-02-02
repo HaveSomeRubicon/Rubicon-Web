@@ -56,8 +56,9 @@ theme_file_path = os.path.join(profile_dir, "theme.py")
 def check_for_config():
     if not os.path.exists(profile_dir):
         os.makedirs(profile_dir)
-    with open(config_file_path, "w") as config_file:
-        config_file.write(str(default_config))
+    if not os.path.exists(config_file_path):
+        with open(config_file_path, "w") as config_file:
+            config_file.write(str(default_config))
 
 
 def get_config():
@@ -69,8 +70,9 @@ def get_config():
 def check_for_theme():
     if not os.path.exists(profile_dir):
         os.makedirs(profile_dir)
-    with open(theme_file_path, "w") as theme_file:
-        theme_file.write(str(default_themes))
+    if not os.path.exists(theme_file_path):
+        with open(theme_file_path, "w") as theme_file:
+            theme_file.write(str(default_themes))
 
 
 def get_themes():
