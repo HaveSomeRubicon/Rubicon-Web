@@ -1,3 +1,4 @@
+import os
 import sys
 
 from PyQt5.QtCore import Qt, QUrl
@@ -18,6 +19,17 @@ class Tabs(QTabBar):
         self.tab_widgets = self.main_window.tab_widgets
         
         self.default_tab = lambda: self.new_web_view_tab(self.main_window.default_qurl)
+        
+        if self.main_window.CONFIG["reopen_last_open_tabs"] and os.path.exists(self.main_window.configutils.last_open_tabs_path):
+            with open(self.main_window.configutils.last_open_tabs_path, "r") as last_open_tabs_file:
+                last_open_tabs = eval(last_open_tabs_file.read())
+                for url in last_open_tabs["last_open_urls"]:
+                    background = False if last_open_tabs["last_open_urls"].index(url) == 0 else True
+                    self.new_web_view_tab(QUrl(url), background)
+            self.setCurrentIndex(last_open_tabs["last_open_tab_index"])
+            self.update_url(last_open_tabs["last_open_tab_index"])
+        else:
+            self.default_tab()
         
         self.setDrawBase(False)
         self.setMovable(True)
