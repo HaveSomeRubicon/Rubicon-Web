@@ -3,7 +3,7 @@ import os
 
 default_config = {
     "theme": "matte black",
-    "reopen_last_open_tabs": True,
+    "reopen_last_session": True,
     "default_url": "https://ecosia.org/",
     "search_url": "https://www.ecosia.org/search?q=%s",
     "show_window_management_buttons": False,
@@ -53,7 +53,7 @@ else:
 web_engine_profile_dirs = {key: (profile_dir + ("\\WebEngineView\\" if os.name == "nt" else "/WebEngineView/") + value) for key, value in {"cachePath": "cache", "persistentStoragePath": "persistentStorage"}.items()}
 config_file_path = os.path.join(profile_dir, "config.py")
 theme_file_path = os.path.join(profile_dir, "theme.py")
-last_open_tabs_path = os.path.join(profile_dir, "last_open_tabs.py")
+last_session_path = os.path.join(profile_dir, "last_session.py")
 
 def check_for_profile_dir():
     if not os.path.exists(profile_dir):

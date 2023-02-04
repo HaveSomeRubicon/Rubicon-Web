@@ -59,9 +59,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     
     def closeEvent(self, event):
         self.configutils.check_for_profile_dir()
-        with open(self.configutils.last_open_tabs_path, "w") as last_open_tabs_file:
-            if self.CONFIG["reopen_last_open_tabs"]:
-                last_open_tabs = {"last_open_urls": self.tab_widgets.get_open_urls(), "last_open_tab_index": self.tab_widgets.currentIndex()}
+        with open(self.configutils.last_session_path, "w") as last_session_file:
+            if self.CONFIG["reopen_last_session"]:
+                last_session = {"last_open_urls": self.tab_widgets.get_open_urls(), "last_open_tab_index": self.tab_widgets.currentIndex()}
             else:
-                last_open_tabs = {"last_open_urls": [self.default_qurl.toString()], "last_open_tab_index": 0}
-            last_open_tabs_file.write(str(last_open_tabs))
+                last_session = {"last_open_urls": [self.default_qurl.toString()], "last_open_tab_index": 0}
+            last_session_file.write(str(last_session))
