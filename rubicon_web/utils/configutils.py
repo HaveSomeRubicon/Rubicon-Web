@@ -53,9 +53,13 @@ web_engine_profile_dirs = {key: (profile_dir + ("\\WebEngineView\\" if os.name =
 config_file_path = os.path.join(profile_dir, "config.py")
 theme_file_path = os.path.join(profile_dir, "theme.py")
 
-def check_for_config():
+def check_for_profile_dir():
     if not os.path.exists(profile_dir):
         os.makedirs(profile_dir)
+
+
+def check_for_config():
+    check_for_profile_dir()
     if not os.path.exists(config_file_path):
         with open(config_file_path, "w") as config_file:
             config_file.write(str(default_config))
@@ -68,8 +72,7 @@ def get_config():
 
 
 def check_for_theme():
-    if not os.path.exists(profile_dir):
-        os.makedirs(profile_dir)
+    check_for_profile_dir()
     if not os.path.exists(theme_file_path):
         with open(theme_file_path, "w") as theme_file:
             theme_file.write(str(default_themes))
