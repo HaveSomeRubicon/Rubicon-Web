@@ -36,6 +36,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         widgets_with_stylesheets = [self.centralwidget, self.top_bar.nav_bar, self.top_bar, self.top_bar.tab_bar]
         self.init_stylesheets(widgets_with_stylesheets)
         
+        if os.path.exists(self.configutils.last_session_path):
+            with open(self.configutils.last_session_path, "r") as last_session_file:
+                last_session = eval(last_session_file.read())
+                self.setGeometry(*last_session["window_geometry"])
+                if last_session["maximized"]:
+                    self.showMaximized()
+        
         self.setWindowTitle("Rubicon Web")
     
     def init_stylesheets(self, widgets):
@@ -60,8 +67,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def closeEvent(self, event):
         self.configutils.check_for_profile_dir()
         with open(self.configutils.last_session_path, "w") as last_session_file:
+            last_session = {
+                "last_open_urls": [], 
+                "last_open_tab_index": 0, 
+                "window_geometry": [self.geometry().x(), self.geometry().y(), self.geometry().width(), self.geometry().height()], 
+                "maximized": self.isMaximized(),
+            }
             if self.CONFIG["reopen_last_session"]:
-                last_session = {"last_open_urls": self.tab_widgets.get_open_urls(), "last_open_tab_index": self.tab_widgets.currentIndex()}
+                last_session["last_open_urls"] = self.tab_widgets.get_open_urls()
+                last_session["last_open_tab_index"] = self.tab_widgets.currentIndex()
             else:
-                last_session = {"last_open_urls": [self.default_qurl.toString()], "last_open_tab_index": 0}
+                last_session["last_open_urls"] = [self.default_qurl.toString()]
+                last_session["last_open_tab_index"] = 0
             last_session_file.write(str(last_session))
