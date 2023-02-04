@@ -15,7 +15,7 @@ def main():
     else:
         app_dir = os.path.dirname(os.path.abspath(__file__))
     
-    window = MainWindow(configutils, app_dir)
+    window = MainWindow(None, configutils, app_dir)
     window.show()
     
     app.exec()

@@ -8,8 +8,8 @@ from ....web_engine.web_engine import WebEngineView
 
 
 class Tabs(QTabBar):
-    def __init__(self, main_window, *args, **kwargs):
-        super(Tabs, self).__init__(*args, **kwargs)
+    def __init__(self, parent, main_window, *args, **kwargs):
+        super(Tabs, self).__init__(parent=parent, *args, **kwargs)
         
         self.main_window = main_window
         
@@ -32,7 +32,7 @@ class Tabs(QTabBar):
         self.tab_widgets.setCurrentIndex(tab_index)
         if not self.main_window.tab_widgets.count() < 1:
             current_web_view = self.tab_widgets.currentWidget()
-            self.main_window.top_bar.nav_bar.url_bar.update_url(current_web_view.url(), current_web_view)
+            self.parent().parent().nav_bar.url_bar.update_url(current_web_view.url(), current_web_view)
     
     def tab_moved(self, to, _from):
         moved_tab_widget = self.tab_widgets.widget(_from)
@@ -40,7 +40,7 @@ class Tabs(QTabBar):
         self.tab_widgets.insertWidget(to, moved_tab_widget)
 
     def new_web_view_tab(self, qurl: QUrl = None, background: bool = False):
-        browser = WebEngineView(self.main_window)
+        browser = WebEngineView(self.main_window.tab_widgets, self.main_window)
         if qurl != None:
             browser.setUrl(qurl)
         tab_index = self.addTab("Loading...")

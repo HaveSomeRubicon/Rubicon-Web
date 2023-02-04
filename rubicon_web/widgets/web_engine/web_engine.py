@@ -2,8 +2,8 @@ from PyQt5.QtWebEngineWidgets import QWebEnginePage, QWebEngineView
 
 
 class WebEnginePage(QWebEnginePage):
-    def __init__(self, main_window, *args, **kwargs):
-        super(WebEnginePage, self).__init__(*args, **kwargs)
+    def __init__(self, parent, main_window, *args, **kwargs):
+        super(WebEnginePage, self).__init__(parent=parent, *args, **kwargs)
         self.main_window = main_window
 
     def triggerAction(self, action: 'QWebEnginePage.WebAction', checked: bool = False) -> None:
@@ -17,15 +17,15 @@ class WebEnginePage(QWebEnginePage):
 
 
 class WebEngineView(QWebEngineView):
-    def __init__(self, main_window, parent=None, *args, **kwargs):
-        super().__init__(parent, *args, **kwargs)
+    def __init__(self, parent, main_window, *args, **kwargs):
+        super().__init__(parent=parent, *args, **kwargs)
         self.main_window = main_window
 
         self.loadProgress.connect(self.load_started)
         self.loadFinished.connect(self.load_finished)
         self.urlChanged.connect(self.url_changed)
         
-        self.setPage(WebEnginePage(self.main_window))
+        self.setPage(WebEnginePage(self, self.main_window))
     
     def createWindow(self, window_type: QWebEnginePage.WebWindowType) -> 'QWebEngineView':
         if window_type == QWebEnginePage.WebWindowType.WebBrowserTab:

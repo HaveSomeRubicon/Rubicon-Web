@@ -11,8 +11,8 @@ from ..tab_widgets.tab_widgets import TabWidgets
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
-    def __init__(self, configutils, app_dir, *args, **kwargs):
-        super(MainWindow, self).__init__(*args, **kwargs)
+    def __init__(self, parent, configutils, app_dir, *args, **kwargs):
+        super(MainWindow, self).__init__(parent=parent, *args, **kwargs)
         self.setupUi(self)
         
         self.configutils = configutils
@@ -25,14 +25,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.relative_to_abs_path = lambda file_path: os.path.join(self.app_dir, file_path)
         self.nt_to_posix_path = lambda file_path: ''.join(str(PurePosixPath(PureWindowsPath(file_path))).split("\\")[1:])
         
-        self.tab_widgets = TabWidgets()
+        self.tab_widgets = TabWidgets(self)
         self.main_layout.addWidget(self.tab_widgets)
         
-        self.top_bar = TopBar(self)
+        self.top_bar = TopBar(self, self)
         self.centralwidget_layout.insertWidget(0, self.top_bar)
 
-        self.top_bar.tab_bar.tabs.default_tab()
-        
         self.main_layout.setSizes([0])
         
         widgets_with_stylesheets = [self.centralwidget, self.top_bar.nav_bar, self.top_bar, self.top_bar.tab_bar]

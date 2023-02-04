@@ -10,8 +10,8 @@ from widgets.web_engine.web_engine import WebEngineView
 
 
 class UrlBar(QLineEdit):
-    def __init__(self, main_window, *args, **kwargs):
-        super(UrlBar, self).__init__(*args, **kwargs)
+    def __init__(self, parent, main_window, *args, **kwargs):
+        super(UrlBar, self).__init__(parent=parent, *args, **kwargs)
         
         self.main_window = main_window
         

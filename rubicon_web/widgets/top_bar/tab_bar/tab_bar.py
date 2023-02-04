@@ -7,15 +7,15 @@ from widgets.top_bar.tab_bar.window_management_buttons.window_management_buttons
 
 
 class TabBar(QWidget, Ui_tab_bar):
-    def __init__(self, main_window, *args, **kwargs):
-        super(TabBar, self).__init__(*args, **kwargs)
+    def __init__(self, parent, main_window, *args, **kwargs):
+        super(TabBar, self).__init__(parent=parent, *args, **kwargs)
         self.setupUi(self)
         
         self.main_window = main_window
 
         self.setAttribute(Qt.WA_StyledBackground, True)
         
-        self.tabs = Tabs(self.main_window)
+        self.tabs = Tabs(self, self.main_window)
         self.tab_bar_layout.addWidget(self.tabs)
         
         if self.main_window.CONFIG["show_window_management_buttons"]:
