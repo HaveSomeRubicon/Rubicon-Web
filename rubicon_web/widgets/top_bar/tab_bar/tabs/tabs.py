@@ -25,10 +25,10 @@ class Tabs(QTabBar):
         self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
 
         self.tabCloseRequested.connect(self.close_tab)
-        self.currentChanged.connect(self.tab_changed)
+        self.currentChanged.connect(self.update_url)
         self.tabMoved.connect(self.tab_moved)
 
-    def tab_changed(self, tab_index):
+    def update_url(self, tab_index):
         self.tab_widgets.setCurrentIndex(tab_index)
         if not self.main_window.tab_widgets.count() < 1:
             current_web_view = self.tab_widgets.currentWidget()
@@ -48,6 +48,7 @@ class Tabs(QTabBar):
         
         if not background:
             self.setCurrentIndex(tab_index)
+            self.update_url(tab_index)
         
         self.tab_widgets.widget(tab_index).setAttribute(Qt.WA_DeleteOnClose, True)
         
