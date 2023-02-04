@@ -17,6 +17,8 @@ class Tabs(QTabBar):
         
         self.tab_widgets = self.main_window.tab_widgets
         
+        self.default_tab = lambda: self.new_web_view_tab(self.main_window.default_qurl)
+        
         self.setDrawBase(False)
         self.setMovable(True)
         self.setTabsClosable(True)

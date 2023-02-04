@@ -31,7 +31,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.top_bar = TopBar(self)
         self.centralwidget_layout.insertWidget(0, self.top_bar)
 
-        self.top_bar.nav_bar.default_tab()
+        self.top_bar.tab_bar.tabs.default_tab()
         
         self.main_layout.setSizes([0])
         

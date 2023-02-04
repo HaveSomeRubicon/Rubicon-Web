@@ -16,8 +16,5 @@ class NavBar(QWidget, Ui_nav_bar):
         self.url_bar = UrlBar(self.main_window)
         self.nav_bar_layout.insertWidget(3, self.url_bar)
         
-        self.default_tab = lambda: self.main_window.top_bar.tab_bar.tabs.new_web_view_tab(self.main_window.default_qurl)
-        
         self.back_button.clicked.connect(lambda: self.main_window.tab_widgets.currentWidget().back())
         self.forward_button.clicked.connect(lambda: self.main_window.tab_widgets.currentWidget().forward())
-        self.new_tab_button.clicked.connect(self.default_tab)
