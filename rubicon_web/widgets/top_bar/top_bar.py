@@ -21,5 +21,5 @@ class TopBar(QWidget):
         self.top_bar_layout.addWidget(self.tab_bar)
         
         self.nav_bar = NavBar(self.main_window)
-        self.new_tab_button.clicked.connect(self.tab_bar.tabs.default_tab)
+        self.nav_bar.new_tab_button.clicked.connect(self.tab_bar.tabs.default_tab)
         self.top_bar_layout.addWidget(self.nav_bar)
