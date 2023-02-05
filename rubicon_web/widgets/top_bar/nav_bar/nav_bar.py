@@ -8,6 +8,7 @@ from widgets.top_bar.nav_bar.url_bar.url_bar import UrlBar
 class NavBar(QWidget, Ui_nav_bar):
     def __init__(self, parent, main_window, *args, **kwargs):
         super(NavBar, self).__init__(parent=parent, *args, **kwargs)
+        self.parent().parent().log("NavBar is being initialized", "NOTICE", "nav_bar.py")
         self.setupUi(self)
         
         self.main_window = main_window
@@ -18,3 +19,4 @@ class NavBar(QWidget, Ui_nav_bar):
         
         self.back_button.clicked.connect(lambda: self.main_window.tab_widgets.currentWidget().back())
         self.forward_button.clicked.connect(lambda: self.main_window.tab_widgets.currentWidget().forward())
+        self.parent().parent().log("NavBar has been initialized", "SUCCESS", "nav_bar.py")

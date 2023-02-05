@@ -11,11 +11,14 @@ from ..tab_widgets.tab_widgets import TabWidgets
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
-    def __init__(self, parent, configutils, app_dir, *args, **kwargs):
+    def __init__(self, parent, configutils, log_function, app_dir, *args, **kwargs):
+        log_function("MainWindow is being initialized", "NOTICE", "mainwindow.py")
         super(MainWindow, self).__init__(parent=parent, *args, **kwargs)
         self.setupUi(self)
         
+        
         self.configutils = configutils
+        self.log = log_function
         self.app_dir = app_dir
         self.profile_dir = configutils.profile_dir
         self.CONFIG = configutils.get_config()
@@ -44,8 +47,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     self.showMaximized()
         
         self.setWindowTitle("Rubicon Web")
+        self.log("MainWindow has been initialized", "SUCCESS", "mainwindow.py")
     
     def init_stylesheets(self, widgets):
+        self.log("Initializing stylesheets", "NOTICE", "mainwindow.py")
         for widget in widgets:
             widget.hide()
             widget_stylesheet = widget.styleSheet()
@@ -63,8 +68,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             widget.show()
             widget.setStyleSheet(widget_stylesheet)
+        self.log("Finished initializing stylesheets", "SUCCESS", "mainwindow.py")
     
     def closeEvent(self, event):
+        self.log("Mainwindow is closing", "NOTICE", "mainwindow.py")
         self.configutils.check_for_profile_dir()
         with open(self.configutils.last_session_path, "w") as last_session_file:
             last_session = {
@@ -80,3 +87,5 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 last_session["last_open_urls"] = [self.default_qurl.toString()]
                 last_session["last_open_tab_index"] = 0
             last_session_file.write(str(last_session))
+            self.log(f"Saved current session to {self.configutils.last_session_path}", "SUCCESS", "mainwindow.py")
+            self.log("Mainwindow has been closed", "SUCCESS", "mainwindow.py")

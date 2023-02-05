@@ -12,6 +12,7 @@ from widgets.web_engine.web_engine import WebEngineView
 class UrlBar(QLineEdit):
     def __init__(self, parent, main_window, *args, **kwargs):
         super(UrlBar, self).__init__(parent=parent, *args, **kwargs)
+        self.parent().parent().parent().log("UrlBar is being initialized", "NOTICE", "url_bar.py")
         
         self.main_window = main_window
         
@@ -21,6 +22,7 @@ class UrlBar(QLineEdit):
         self.selected = False
 
         self.returnPressed.connect(self.change_url)
+        self.parent().parent().parent().log("UrlBar has been initialized", "SUCCESS", "url_bar.py")
     
     def update_url(self, qurl: QUrl, browser: WebEngineView or QWebEngineView):
         if browser == self.main_window.tab_widgets.currentWidget():

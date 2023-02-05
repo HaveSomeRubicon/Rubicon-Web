@@ -7,6 +7,7 @@ from widgets.top_bar.nav_bar.nav_bar import NavBar
 class TopBar(QWidget):
     def __init__(self, parent, main_window, *args, **kwargs):
         super(TopBar, self).__init__(parent=parent, *args, **kwargs)
+        self.parent().log("TopBar is being initialized", "NOTICE", "top_bar.py")
         
         self.main_window = main_window
         
@@ -24,3 +25,4 @@ class TopBar(QWidget):
         self.top_bar_layout.insertWidget(0, self.tab_bar)
         
         self.nav_bar.new_tab_button.clicked.connect(self.tab_bar.tabs.default_tab)
+        self.parent().log("TopBar has been initialized", "SUCCESS", "top_bar.py")

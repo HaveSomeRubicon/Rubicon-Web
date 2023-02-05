@@ -1,4 +1,5 @@
 import os
+from utils.logger import log
 
 
 default_config = {
@@ -54,10 +55,17 @@ web_engine_profile_dirs = {key: (profile_dir + ("\\WebEngineView\\" if os.name =
 config_file_path = os.path.join(profile_dir, "config.py")
 theme_file_path = os.path.join(profile_dir, "theme.py")
 last_session_path = os.path.join(profile_dir, "last_session.py")
+log_file_path = os.path.join(profile_dir, "logs.txt")
+log(f"Set profile_dir to {profile_dir}", "SUCCESS", "configutils.py")
+log(f"Set web_engine_profile_dirs to {web_engine_profile_dirs}", "SUCCESS", "configutils.py")
+log(f"Set config_file_path to {config_file_path}", "SUCCESS", "configutils.py")
+log(f"Set them_file_path to {theme_file_path}", "SUCCESS", "configutils.py")
+log(f"Set last_session_path to {last_session_path}", "SUCCESS", "configutils.py")
 
 def check_for_profile_dir():
     if not os.path.exists(profile_dir):
         os.makedirs(profile_dir)
+        log("Profile directory was missing. It has been recreated.", "NOTICE", "configuitls.py")
 
 
 def check_for_config():
@@ -65,6 +73,7 @@ def check_for_config():
     if not os.path.exists(config_file_path):
         with open(config_file_path, "w") as config_file:
             config_file.write(str(default_config))
+        log("Config file was missing. It has been recreated.", "NOTICE", "configuitls.py")
 
 
 def get_config():
@@ -78,6 +87,7 @@ def check_for_theme():
     if not os.path.exists(theme_file_path):
         with open(theme_file_path, "w") as theme_file:
             theme_file.write(str(default_themes))
+        log("Themes file was missing. It has been recreated.", "NOTICE", "configuitls.py")
 
 
 def get_themes():
@@ -90,6 +100,7 @@ def check_for_web_engine_dirs():
     for web_engine_dir in web_engine_profile_dirs.values():
         if not os.path.exists(web_engine_dir):
             os.makedirs(web_engine_dir)
+            log(f"{web_engine_dir} was missing. It has been recreated.", "NOTICE", "configuitls.py")
 
 
 def get_cache_dir():
