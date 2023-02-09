@@ -13,7 +13,7 @@ class UrlBar(QLineEdit):
     def __init__(self, parent, main_window, *args, **kwargs):
         """Initializes the URL bar"""
         super(UrlBar, self).__init__(parent=parent, *args, **kwargs)
-        self.parent().parent().parent().log("UrlBar is being initialized", "NOTICE", "url_bar.py")
+        self.parent().parent().parent().log("UrlBar is being initialized", "OKAY", "url_bar.py")
         
         self.main_window = main_window
         

@@ -9,7 +9,7 @@ class NavBar(QWidget, Ui_nav_bar):
     def __init__(self, parent, main_window, *args, **kwargs):
         """Initializes the navigation bar"""
         super(NavBar, self).__init__(parent=parent, *args, **kwargs)
-        self.parent().parent().log("NavBar is being initialized", "NOTICE", "nav_bar.py")
+        self.parent().parent().log("NavBar is being initialized", "OKAY", "nav_bar.py")
         self.setupUi(self)
         
         self.main_window = main_window

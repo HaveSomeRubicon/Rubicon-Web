@@ -7,7 +7,7 @@ from widgets.top_bar.nav_bar.nav_bar import NavBar
 class TopBar(QWidget):
     def __init__(self, parent, main_window, *args, **kwargs):
         super(TopBar, self).__init__(parent=parent, *args, **kwargs)
-        self.parent().log("TopBar is being initialized", "NOTICE", "top_bar.py")
+        self.parent().log("TopBar is being initialized", "OKAY", "top_bar.py")
         
         self.main_window = main_window
         

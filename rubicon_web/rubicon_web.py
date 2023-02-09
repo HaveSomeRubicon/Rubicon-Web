@@ -11,7 +11,7 @@ from utils.logger import log
 
 def main():
     """This function starts Rubicon Web"""
-    log("Rubicon Web is starting", "NOTICE", "rubicon_web.py")
+    log("Rubicon Web is starting", "OKAY", "rubicon_web.py")
     app = QApplication(sys.argv)
     log("QApplication was successfully created", "SUCCESS", "rubicon_web.py")
     
@@ -25,10 +25,10 @@ def main():
     window = MainWindow(None, configutils, log, app_dir)
     window.show()
     
-    log("QApplication is executing", "NOTICE", "rubicon_web.py")
+    log("QApplication is executing", "OKAY", "rubicon_web.py")
     app.exec()
-    log("QApplication has closed", "NOTICE", "rubicon_web.py")
-    log("Rubicon Web has closed", "NOTICE", "rubicon_web.py")
+    log("QApplication has closed", "OKAY", "rubicon_web.py")
+    log("Rubicon Web has closed", "OKAY", "rubicon_web.py")
 
 if __name__ == "__main__":
     main()

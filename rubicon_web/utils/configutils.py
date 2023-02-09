@@ -70,7 +70,7 @@ def check_for_profile_dir():
     """Creates a profile directory if it doesn't exist"""
     if not os.path.exists(profile_dir):
         os.makedirs(profile_dir)
-        log("Profile directory was missing. It has been recreated.", "NOTICE", "configuitls.py")
+        log("Profile directory was missing. It has been recreated.", "OKAY", "configuitls.py")
 
 
 def check_for_config():
@@ -79,7 +79,7 @@ def check_for_config():
     if not os.path.exists(config_file_path):
         with open(config_file_path, "w") as config_file:
             config_file.write(str(default_config))
-        log("Config file was missing. It has been recreated.", "NOTICE", "configuitls.py")
+        log("Config file was missing. It has been recreated.", "OKAY", "configuitls.py")
 
 
 def get_config():
@@ -95,7 +95,7 @@ def check_for_theme():
     if not os.path.exists(theme_file_path):
         with open(theme_file_path, "w") as theme_file:
             theme_file.write(str(default_themes))
-        log("Themes file was missing. It has been recreated.", "NOTICE", "configuitls.py")
+        log("Themes file was missing. It has been recreated.", "OKAY", "configuitls.py")
 
 
 def get_themes():
@@ -110,7 +110,7 @@ def check_for_web_engine_dirs():
     for web_engine_dir in web_engine_profile_dirs.values():
         if not os.path.exists(web_engine_dir):
             os.makedirs(web_engine_dir)
-            log(f"{web_engine_dir} was missing. It has been recreated.", "NOTICE", "configuitls.py")
+            log(f"{web_engine_dir} was missing. It has been recreated.", "OKAY", "configuitls.py")
 
 
 def get_cache_dir():

@@ -13,7 +13,7 @@ from ..tab_widgets.tab_widgets import TabWidgets
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, parent, configutils, log_function, app_dir, *args, **kwargs):
         """Initializes the main window"""
-        log_function("MainWindow is being initialized", "NOTICE", "mainwindow.py")
+        log_function("MainWindow is being initialized", "OKAY", "mainwindow.py")
         super(MainWindow, self).__init__(parent=parent, *args, **kwargs)
         self.setupUi(self)
         
@@ -52,7 +52,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     
     def init_stylesheets(self, widgets):
         """Applies themes converts relative paths to absolute paths in stylesheets"""
-        self.log("Initializing stylesheets", "NOTICE", "mainwindow.py")
+        self.log("Initializing stylesheets", "OKAY", "mainwindow.py")
         for widget in widgets:
             widget.hide()
             widget_stylesheet = widget.styleSheet()
@@ -76,7 +76,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     
     def closeEvent(self, event):
         """Saves the current session to the last session file"""
-        self.log("Mainwindow is closing", "NOTICE", "mainwindow.py")
+        self.log("Mainwindow is closing", "OKAY", "mainwindow.py")
         self.configutils.check_for_profile_dir()
         with open(self.configutils.last_session_path, "w") as last_session_file:
             last_session = {
