@@ -11,6 +11,7 @@ from widgets.web_engine.web_engine import WebEngineView
 
 class UrlBar(QLineEdit):
     def __init__(self, parent, main_window, *args, **kwargs):
+        """Initializes the URL bar"""
         super(UrlBar, self).__init__(parent=parent, *args, **kwargs)
         self.parent().parent().parent().log("UrlBar is being initialized", "NOTICE", "url_bar.py")
         
@@ -25,11 +26,13 @@ class UrlBar(QLineEdit):
         self.parent().parent().parent().log("UrlBar has been initialized", "SUCCESS", "url_bar.py")
     
     def update_url(self, qurl: QUrl, browser: WebEngineView or QWebEngineView):
+        """Updates the current text in the URL bar"""
         if browser == self.main_window.tab_widgets.currentWidget():
             self.setText(qurl.toString())
             self.setCursorPosition(0)
     
     def change_url(self):
+        """This function is called when the user hits return after typing in a URL or search query"""
         url = self.text().strip()
         
         if validators.url(QUrl.fromUserInput(url).toString()):
@@ -43,18 +46,22 @@ class UrlBar(QLineEdit):
         self.main_window.tab_widgets.currentWidget().setUrl(qurl)
 
     def selectAll(self) -> None:
+        """Selects all the text in the URL bar"""
         self.selected = True
         return super().selectAll()
     
     def deselect(self) -> None:
+        """Deselects all the text in the URL bar"""
         self.selected = False
         return super().deselect()
     
     def mousePressEvent(self, event) -> None:
+        """Selects all text when the URL bar is clicked"""
         super(UrlBar, self).mousePressEvent(event)
         if self.selected == False:
             self.selectAll()
     
     def focusOutEvent(self, event) -> None:
+        """Deselects all text when the URL bar loses focus"""
         super(UrlBar, self).focusOutEvent(event)
         self.deselect()

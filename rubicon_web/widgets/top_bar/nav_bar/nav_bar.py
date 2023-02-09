@@ -7,6 +7,7 @@ from widgets.top_bar.nav_bar.url_bar.url_bar import UrlBar
 
 class NavBar(QWidget, Ui_nav_bar):
     def __init__(self, parent, main_window, *args, **kwargs):
+        """Initializes the navigation bar"""
         super(NavBar, self).__init__(parent=parent, *args, **kwargs)
         self.parent().parent().log("NavBar is being initialized", "NOTICE", "nav_bar.py")
         self.setupUi(self)

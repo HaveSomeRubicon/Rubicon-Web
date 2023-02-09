@@ -10,9 +10,12 @@ from utils.logger import log
 
 
 def main():
+    """This function starts Rubicon Web"""
     log("Rubicon Web is starting", "NOTICE", "rubicon_web.py")
     app = QApplication(sys.argv)
     log("QApplication was successfully created", "SUCCESS", "rubicon_web.py")
+    
+    # Sets app_dir to the directory containing Rubicon Web files
     if getattr(sys, 'frozen', False):
         app_dir = sys._MEIPASS
     else:

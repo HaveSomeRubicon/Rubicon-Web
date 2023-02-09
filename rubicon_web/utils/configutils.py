@@ -47,28 +47,34 @@ default_themes = {
     }
 }
 
+# profile_dir is the directory which contains config files, themes and other import files that Rubicon Web uses
 if os.name == "nt":
     profile_dir = f"C:\\Users\\{os.getlogin()}\\.HaveSomeRubicon\\Rubicon-Web"
 else:
     profile_dir = f"/home/{os.getlogin()}/.config/Rubicon-Web"
-web_engine_profile_dirs = {key: (profile_dir + ("\\WebEngineView\\" if os.name == "nt" else "/WebEngineView/") + value) for key, value in {"cachePath": "cache", "persistentStoragePath": "persistentStorage"}.items()}
-config_file_path = os.path.join(profile_dir, "config.py")
-theme_file_path = os.path.join(profile_dir, "theme.py")
-last_session_path = os.path.join(profile_dir, "last_session.py")
-log_file_path = os.path.join(profile_dir, "logs.txt")
 log(f"Set profile_dir to {profile_dir}", "SUCCESS", "configutils.py")
+# web_engine_profile_dirs contains files that QWebEngineView uses
+web_engine_profile_dirs = {key: (profile_dir + ("\\WebEngineView\\" if os.name == "nt" else "/WebEngineView/") + value) for key, value in {"cachePath": "cache", "persistentStoragePath": "persistentStorage"}.items()}
 log(f"Set web_engine_profile_dirs to {web_engine_profile_dirs}", "SUCCESS", "configutils.py")
+# This is the path to the config file
+config_file_path = os.path.join(profile_dir, "config.py")
 log(f"Set config_file_path to {config_file_path}", "SUCCESS", "configutils.py")
-log(f"Set them_file_path to {theme_file_path}", "SUCCESS", "configutils.py")
+# This is the path to the themes file
+theme_file_path = os.path.join(profile_dir, "theme.py")
+log(f"Set theme_file_path to {theme_file_path}", "SUCCESS", "configutils.py")
+# This is the path to the last session file
+last_session_path = os.path.join(profile_dir, "last_session.py")
 log(f"Set last_session_path to {last_session_path}", "SUCCESS", "configutils.py")
 
 def check_for_profile_dir():
+    """Creates a profile directory if it doesn't exist"""
     if not os.path.exists(profile_dir):
         os.makedirs(profile_dir)
         log("Profile directory was missing. It has been recreated.", "NOTICE", "configuitls.py")
 
 
 def check_for_config():
+    """Creates a config file if it doesn't exist"""
     check_for_profile_dir()
     if not os.path.exists(config_file_path):
         with open(config_file_path, "w") as config_file:
@@ -77,12 +83,14 @@ def check_for_config():
 
 
 def get_config():
+    """Returns config"""
     check_for_config()
     with open(config_file_path, "r") as config_file:
         return eval(config_file.read())
 
 
 def check_for_theme():
+    """Creates a themes file if it doesn't exist"""
     check_for_profile_dir()
     if not os.path.exists(theme_file_path):
         with open(theme_file_path, "w") as theme_file:
@@ -91,12 +99,14 @@ def check_for_theme():
 
 
 def get_themes():
+    """Returns themes"""
     check_for_theme()
     with open(theme_file_path, "r") as theme_file:
         return eval(theme_file.read())
 
 
 def check_for_web_engine_dirs():
+    """Creates a web_engine_dirs if they don't exist"""
     for web_engine_dir in web_engine_profile_dirs.values():
         if not os.path.exists(web_engine_dir):
             os.makedirs(web_engine_dir)
@@ -104,10 +114,12 @@ def check_for_web_engine_dirs():
 
 
 def get_cache_dir():
+    """Returns the web engine cache directory"""
     check_for_web_engine_dirs()
     return web_engine_profile_dirs["cachePath"]
 
 
 def get_persistent_storage_dir():
+    """Returns the persistent storage directory"""
     check_for_web_engine_dirs()
     return web_engine_profile_dirs["persistentStoragePath"]

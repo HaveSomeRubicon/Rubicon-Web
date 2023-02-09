@@ -12,10 +12,10 @@ from ..tab_widgets.tab_widgets import TabWidgets
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, parent, configutils, log_function, app_dir, *args, **kwargs):
+        """Initializes the main window"""
         log_function("MainWindow is being initialized", "NOTICE", "mainwindow.py")
         super(MainWindow, self).__init__(parent=parent, *args, **kwargs)
         self.setupUi(self)
-        
         
         self.configutils = configutils
         self.log = log_function
@@ -39,6 +39,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         widgets_with_stylesheets = [self.centralwidget, self.top_bar.nav_bar, self.top_bar, self.top_bar.tab_bar]
         self.init_stylesheets(widgets_with_stylesheets)
         
+        # Sets window geometry to the geometry from the last session
         if os.path.exists(self.configutils.last_session_path):
             with open(self.configutils.last_session_path, "r") as last_session_file:
                 last_session = eval(last_session_file.read())
@@ -50,14 +51,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.log("MainWindow has been initialized", "SUCCESS", "mainwindow.py")
     
     def init_stylesheets(self, widgets):
+        """Applies themes converts relative paths to absolute paths in stylesheets"""
         self.log("Initializing stylesheets", "NOTICE", "mainwindow.py")
         for widget in widgets:
             widget.hide()
             widget_stylesheet = widget.styleSheet()
             
+            # Apply themes
             for key in self.THEME["colors"].keys():
                 widget_stylesheet = widget_stylesheet.replace('/' + key + '/', self.THEME["colors"][key])
 
+            # Convert relative to absolute paths
             split_stylesheet = widget_stylesheet.split('*')
             for index in range(1, len(split_stylesheet), 2):
                 file_path = self.relative_to_abs_path(split_stylesheet[index])
@@ -71,6 +75,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.log("Finished initializing stylesheets", "SUCCESS", "mainwindow.py")
     
     def closeEvent(self, event):
+        """Saves the current session to the last session file"""
         self.log("Mainwindow is closing", "NOTICE", "mainwindow.py")
         self.configutils.check_for_profile_dir()
         with open(self.configutils.last_session_path, "w") as last_session_file:

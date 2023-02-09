@@ -17,4 +17,5 @@ def log(message, type, source_file):
     with open(log_file_path, "a") as log_file:
         log_file.write(formatted_message)
 
+# This is the path to the log file
 log(f"Set log_file_path to {log_file_path}", "SUCCESS", "configutils.py")
