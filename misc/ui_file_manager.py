@@ -1,7 +1,6 @@
 import os
 import sys
 import PyQt5.uic
-help(PyQt5.uic)
 
 
 clear = lambda: os.system("clear||cls")
