@@ -5,6 +5,7 @@ import PyQt5.uic
 
 clear = lambda: os.system("clear||cls")
 
+
 def ui_to_py():
     PyQt5.uic.compileUiDir("rubicon_web", recurse=True)
 
@@ -34,22 +35,23 @@ def get_user_input():
         ("4", "Quit this program", sys.exit),
     )
     options_indexes = [option[0] for option in options]
-    
+
     clear()
     for option in options:
         print(f"{option[0]}: {option[1]}")
     selected_option = input("\nSelect an option number and press enter: ")
-    
+
     if not selected_option in options_indexes:
         clear()
         input("That option does not exist! Press enter to try again.")
         get_user_input()
         return
-    
+
     clear()
     options[int(selected_option) - 1][2]()
     input("The task was successfully completed. Press enter to continue.")
     get_user_input()
+
 
 if __name__ == "__main__":
     get_user_input()

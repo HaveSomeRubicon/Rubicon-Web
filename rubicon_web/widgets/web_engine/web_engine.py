@@ -6,7 +6,9 @@ class WebEnginePage(QWebEnginePage):
         super(WebEnginePage, self).__init__(parent=parent, *args, **kwargs)
         self.main_window = main_window
 
-    def triggerAction(self, action: 'QWebEnginePage.WebAction', checked: bool = False) -> None:
+    def triggerAction(
+        self, action: "QWebEnginePage.WebAction", checked: bool = False
+    ) -> None:
         if action == QWebEnginePage.OpenLinkInNewWindow:
             self.parent.createWindow(QWebEnginePage.WebWindowType.WebBrowserTab)
 
@@ -24,33 +26,43 @@ class WebEngineView(QWebEngineView):
         self.loadProgress.connect(self.load_started)
         self.loadFinished.connect(self.load_finished)
         self.urlChanged.connect(self.url_changed)
-        
+
         self.setPage(WebEnginePage(self, self.main_window))
-    
-    def createWindow(self, window_type: QWebEnginePage.WebWindowType) -> 'QWebEngineView':
+
+    def createWindow(
+        self, window_type: QWebEnginePage.WebWindowType
+    ) -> "QWebEngineView":
         if window_type == QWebEnginePage.WebWindowType.WebBrowserTab:
-            return self.main_window.tab_widgets.widget(self.main_window.top_bar.tab_bar.tabs.new_web_view_tab())
+            return self.main_window.tab_widgets.widget(
+                self.main_window.top_bar.tab_bar.tabs.new_web_view_tab()
+            )
         elif window_type == QWebEnginePage.WebWindowType.WebBrowserBackgroundTab:
-            return self.main_window.tab_widgets.widget(self.main_window.top_bar.tab_bar.tabs.new_web_view_tab(background = True))
-        
+            return self.main_window.tab_widgets.widget(
+                self.main_window.top_bar.tab_bar.tabs.new_web_view_tab(background=True)
+            )
+
         return super().createWindow(window_type)
-    
+
     def load_started(self):
         if self == self.main_window.tab_widgets.currentWidget():
             self.main_window.top_bar.nav_bar.reload_and_stop_button.setText("9")
-            self.main_window.top_bar.nav_bar.reload_and_stop_button.clicked.connect(lambda: self.main_window.tab_widgets.currentWidget().stop())
-    
+            self.main_window.top_bar.nav_bar.reload_and_stop_button.clicked.connect(
+                lambda: self.main_window.tab_widgets.currentWidget().stop()
+            )
+
     def load_finished(self):
         tab_index = self.main_window.tab_widgets.indexOf(self)
-        
+
         self.main_window.top_bar.nav_bar.reload_and_stop_button.setText("Z")
-        self.main_window.top_bar.nav_bar.reload_and_stop_button.clicked.connect(lambda: self.main_window.tab_widgets.currentWidget().reload())
-        
+        self.main_window.top_bar.nav_bar.reload_and_stop_button.clicked.connect(
+            lambda: self.main_window.tab_widgets.currentWidget().reload()
+        )
+
         title = self.page().title()
         icon = self.page().icon()
         self.main_window.top_bar.tab_bar.tabs.setTabText(tab_index, title)
         self.main_window.top_bar.tab_bar.tabs.setTabIcon(tab_index, icon)
-    
+
     def url_changed(self, qurl):
         if not self.main_window.tab_widgets.count() < 1:
             if self == self.main_window.tab_widgets.currentWidget():

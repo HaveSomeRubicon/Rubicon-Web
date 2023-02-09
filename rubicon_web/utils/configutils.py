@@ -25,8 +25,8 @@ default_themes = {
             "tab_font_color": "rgb(255, 255, 255)",
             "tab_hover_color": "rgba(202, 202, 202, 30)",
             "tab_focus_color": "rgb(10, 10, 10)",
-        },  
-        "theme version": 1
+        },
+        "theme version": 1,
     },
     "red": {
         "colors": {
@@ -43,8 +43,8 @@ default_themes = {
             "tab_hover_color": "rgba(255, 200, 200, 50)",
             "tab_focus_color": "rgb(255, 45, 45)",
         },
-        "theme version": 1
-    }
+        "theme version": 1,
+    },
 }
 
 # profile_dir is the directory which contains config files, themes and other import files that Rubicon Web uses
@@ -54,8 +54,22 @@ else:
     profile_dir = f"/home/{os.getlogin()}/.config/Rubicon-Web"
 log(f"Set profile_dir to {profile_dir}", "SUCCESS", "configutils.py")
 # web_engine_profile_dirs contains files that QWebEngineView uses
-web_engine_profile_dirs = {key: (profile_dir + ("\\WebEngineView\\" if os.name == "nt" else "/WebEngineView/") + value) for key, value in {"cachePath": "cache", "persistentStoragePath": "persistentStorage"}.items()}
-log(f"Set web_engine_profile_dirs to {web_engine_profile_dirs}", "SUCCESS", "configutils.py")
+web_engine_profile_dirs = {
+    key: (
+        profile_dir
+        + ("\\WebEngineView\\" if os.name == "nt" else "/WebEngineView/")
+        + value
+    )
+    for key, value in {
+        "cachePath": "cache",
+        "persistentStoragePath": "persistentStorage",
+    }.items()
+}
+log(
+    f"Set web_engine_profile_dirs to {web_engine_profile_dirs}",
+    "SUCCESS",
+    "configutils.py",
+)
 # This is the path to the config file
 config_file_path = os.path.join(profile_dir, "config.py")
 log(f"Set config_file_path to {config_file_path}", "SUCCESS", "configutils.py")
@@ -66,11 +80,16 @@ log(f"Set theme_file_path to {theme_file_path}", "SUCCESS", "configutils.py")
 last_session_path = os.path.join(profile_dir, "last_session.py")
 log(f"Set last_session_path to {last_session_path}", "SUCCESS", "configutils.py")
 
+
 def check_for_profile_dir():
     """Creates a profile directory if it doesn't exist"""
     if not os.path.exists(profile_dir):
         os.makedirs(profile_dir)
-        log("Profile directory was missing. It has been recreated.", "OKAY", "configuitls.py")
+        log(
+            "Profile directory was missing. It has been recreated.",
+            "OKAY",
+            "configuitls.py",
+        )
 
 
 def check_for_config():
@@ -110,7 +129,11 @@ def check_for_web_engine_dirs():
     for web_engine_dir in web_engine_profile_dirs.values():
         if not os.path.exists(web_engine_dir):
             os.makedirs(web_engine_dir)
-            log(f"{web_engine_dir} was missing. It has been recreated.", "OKAY", "configuitls.py")
+            log(
+                f"{web_engine_dir} was missing. It has been recreated.",
+                "OKAY",
+                "configuitls.py",
+            )
 
 
 def get_cache_dir():

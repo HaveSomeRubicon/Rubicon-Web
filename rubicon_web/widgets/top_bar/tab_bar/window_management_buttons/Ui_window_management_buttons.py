@@ -15,23 +15,35 @@ class Ui_window_management_buttons(object):
     def setupUi(self, window_management_buttons):
         window_management_buttons.setObjectName("window_management_buttons")
         window_management_buttons.resize(85, 23)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(window_management_buttons.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            window_management_buttons.sizePolicy().hasHeightForWidth()
+        )
         window_management_buttons.setSizePolicy(sizePolicy)
         window_management_buttons.setLayoutDirection(QtCore.Qt.LeftToRight)
-        window_management_buttons.setStyleSheet("QWidget {\n"
-"    border: 0px;\n"
-"}")
-        self.window_management_buttons_layout = QtWidgets.QHBoxLayout(window_management_buttons)
+        window_management_buttons.setStyleSheet("QWidget {\n" "    border: 0px;\n" "}")
+        self.window_management_buttons_layout = QtWidgets.QHBoxLayout(
+            window_management_buttons
+        )
         self.window_management_buttons_layout.setContentsMargins(0, 0, 0, 0)
         self.window_management_buttons_layout.setSpacing(0)
-        self.window_management_buttons_layout.setObjectName("window_management_buttons_layout")
+        self.window_management_buttons_layout.setObjectName(
+            "window_management_buttons_layout"
+        )
         self.mazimize_button = QtWidgets.QPushButton(window_management_buttons)
         self.mazimize_button.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("D:\\Code\\Rubicon-Web\\rubicon_web\\widgets\\top_bar\\tab_bar\\window_management_buttons\\png/maximize button icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(
+            QtGui.QPixmap(
+                "D:\\Code\\Rubicon-Web\\rubicon_web\\widgets\\top_bar\\tab_bar\\window_management_buttons\\png/maximize button icon.png"
+            ),
+            QtGui.QIcon.Normal,
+            QtGui.QIcon.Off,
+        )
         self.mazimize_button.setIcon(icon)
         self.mazimize_button.setIconSize(QtCore.QSize(23, 23))
         self.mazimize_button.setObjectName("mazimize_button")
@@ -39,7 +51,13 @@ class Ui_window_management_buttons(object):
         self.minimize_button = QtWidgets.QPushButton(window_management_buttons)
         self.minimize_button.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("D:\\Code\\Rubicon-Web\\rubicon_web\\widgets\\top_bar\\tab_bar\\window_management_buttons\\png/minimize button icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(
+            QtGui.QPixmap(
+                "D:\\Code\\Rubicon-Web\\rubicon_web\\widgets\\top_bar\\tab_bar\\window_management_buttons\\png/minimize button icon.png"
+            ),
+            QtGui.QIcon.Normal,
+            QtGui.QIcon.Off,
+        )
         self.minimize_button.setIcon(icon1)
         self.minimize_button.setIconSize(QtCore.QSize(23, 23))
         self.minimize_button.setObjectName("minimize_button")
@@ -47,7 +65,13 @@ class Ui_window_management_buttons(object):
         self.close_button = QtWidgets.QPushButton(window_management_buttons)
         self.close_button.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("D:\\Code\\Rubicon-Web\\rubicon_web\\widgets\\top_bar\\tab_bar\\window_management_buttons\\png/close button icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(
+            QtGui.QPixmap(
+                "D:\\Code\\Rubicon-Web\\rubicon_web\\widgets\\top_bar\\tab_bar\\window_management_buttons\\png/close button icon.png"
+            ),
+            QtGui.QIcon.Normal,
+            QtGui.QIcon.Off,
+        )
         self.close_button.setIcon(icon2)
         self.close_button.setIconSize(QtCore.QSize(23, 23))
         self.close_button.setObjectName("close_button")

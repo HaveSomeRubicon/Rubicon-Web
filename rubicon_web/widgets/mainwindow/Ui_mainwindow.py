@@ -17,16 +17,18 @@ class Ui_MainWindow(object):
         MainWindow.resize(1112, 539)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setAutoFillBackground(False)
-        self.centralwidget.setStyleSheet("QWidget {\n"
-"    background-color: /bg_color/;\n"
-"}")
+        self.centralwidget.setStyleSheet(
+            "QWidget {\n" "    background-color: /bg_color/;\n" "}"
+        )
         self.centralwidget.setObjectName("centralwidget")
         self.centralwidget_layout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.centralwidget_layout.setContentsMargins(0, 0, 0, 0)
         self.centralwidget_layout.setSpacing(0)
         self.centralwidget_layout.setObjectName("centralwidget_layout")
         self.main_layout = QtWidgets.QSplitter(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.main_layout.sizePolicy().hasHeightForWidth())
@@ -36,10 +38,14 @@ class Ui_MainWindow(object):
         self.main_layout.setObjectName("main_layout")
         self.bookmarks_sidebar = QtWidgets.QTreeWidget(self.main_layout)
         self.bookmarks_sidebar.setEnabled(True)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.bookmarks_sidebar.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.bookmarks_sidebar.sizePolicy().hasHeightForWidth()
+        )
         self.bookmarks_sidebar.setSizePolicy(sizePolicy)
         self.bookmarks_sidebar.setObjectName("bookmarks_sidebar")
         self.bookmarks_sidebar.headerItem().setText(0, "1")

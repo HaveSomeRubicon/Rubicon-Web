@@ -15,7 +15,9 @@ class Ui_nav_bar(object):
     def setupUi(self, nav_bar):
         nav_bar.setObjectName("nav_bar")
         nav_bar.resize(1112, 39)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(nav_bar.sizePolicy().hasHeightForWidth())
@@ -76,10 +78,14 @@ class Ui_nav_bar(object):
         self.reload_and_stop_button.setObjectName("reload_and_stop_button")
         self.nav_bar_layout.addWidget(self.reload_and_stop_button)
         self.new_tab_button = QtWidgets.QPushButton(nav_bar)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Preferred
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.new_tab_button.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.new_tab_button.sizePolicy().hasHeightForWidth()
+        )
         self.new_tab_button.setSizePolicy(sizePolicy)
         self.new_tab_button.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.new_tab_button.setIconSize(QtCore.QSize(18, 18))

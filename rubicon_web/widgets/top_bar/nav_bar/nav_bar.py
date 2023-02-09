@@ -11,13 +11,19 @@ class NavBar(QWidget, Ui_nav_bar):
         super(NavBar, self).__init__(parent=parent, *args, **kwargs)
         self.parent().parent().log("NavBar is being initialized", "OKAY", "nav_bar.py")
         self.setupUi(self)
-        
+
         self.main_window = main_window
         self.setAttribute(Qt.WA_StyledBackground, True)
-        
+
         self.url_bar = UrlBar(self, self.main_window)
         self.nav_bar_layout.insertWidget(3, self.url_bar)
-        
-        self.back_button.clicked.connect(lambda: self.main_window.tab_widgets.currentWidget().back())
-        self.forward_button.clicked.connect(lambda: self.main_window.tab_widgets.currentWidget().forward())
-        self.parent().parent().log("NavBar has been initialized", "SUCCESS", "nav_bar.py")
+
+        self.back_button.clicked.connect(
+            lambda: self.main_window.tab_widgets.currentWidget().back()
+        )
+        self.forward_button.clicked.connect(
+            lambda: self.main_window.tab_widgets.currentWidget().forward()
+        )
+        self.parent().parent().log(
+            "NavBar has been initialized", "SUCCESS", "nav_bar.py"
+        )

@@ -15,7 +15,9 @@ class Ui_tab_bar(object):
     def setupUi(self, tab_bar):
         tab_bar.setObjectName("tab_bar")
         tab_bar.resize(640, 480)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(tab_bar.sizePolicy().hasHeightForWidth())
