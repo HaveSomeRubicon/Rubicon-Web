@@ -34,4 +34,4 @@ def log(message, type, source_file):
 
 
 # This is the path to the log file
-log(f"Set log_file_path to {log_file_path}", "SUCCESS", "configutils.py")
+log(f"Set log_file_path to {log_file_path}", "SUCCESS", "logger.py")
