@@ -9,34 +9,25 @@ from ....web_engine.web_engine import WebEngineView
 
 
 class Tabs(QTabBar):
-    def __init__(self, parent, main_window, *args, **kwargs):
+    def __init__(self, parent, *args, **kwargs):
         """Initializes the tabs"""
         super(Tabs, self).__init__(parent=parent, *args, **kwargs)
-
-        self.main_window = main_window
+        self.main_window = self.parent().parent().parent()
 
         self.setAttribute(Qt.WA_StyledBackground, True)
 
         self.tab_widgets = self.main_window.tab_widgets
 
-        self.default_tab = lambda: self.new_web_view_tab(self.main_window.default_qurl)
+        self.default_tab = lambda: self.new_web_view_tab(self.main_window.DEFAULT_QURL)
 
-        if self.main_window.CONFIG["reopen_last_session"] and os.path.exists(
-            self.main_window.configutils.last_session_path
-        ):
-            with open(
-                self.main_window.configutils.last_session_path, "r"
-            ) as last_session_file:
-                last_session = eval(last_session_file.read())
-                for url in last_session["last_open_urls"]:
-                    background = (
-                        False
-                        if last_session["last_open_urls"].index(url) == 0
-                        else True
-                    )
-                    self.new_web_view_tab(QUrl(url), background)
-            self.setCurrentIndex(last_session["last_open_tab_index"])
-            self.update_url(last_session["last_open_tab_index"])
+        if self.main_window.get_configuration()["reopen_last_session"] and os.path.exists(self.main_window.LAST_SESSION_PATH):
+            with open(self.main_window.LAST_SESSION_PATH, "r") as last_session_file:
+                LAST_SESSION = eval(last_session_file.read())
+                for url in LAST_SESSION["last_open_urls"]:
+                    BACKGROUND = (False if LAST_SESSION["last_open_urls"].index(url) == 0 else True)
+                    self.new_web_view_tab(QUrl(url), BACKGROUND)
+            self.setCurrentIndex(LAST_SESSION["last_open_tab_index"])
+            self.update_url(LAST_SESSION["last_open_tab_index"])
         else:
             self.default_tab()
 
@@ -60,25 +51,25 @@ class Tabs(QTabBar):
 
     def tab_moved(self, to, _from):
         """Reorders widgets in the stacked widget containing all the web views when the order of the tabs is changed"""
-        moved_tab_widget = self.tab_widgets.widget(_from)
-        self.tab_widgets.removeWidget(moved_tab_widget)
-        self.tab_widgets.insertWidget(to, moved_tab_widget)
+        MOVED_TAB_WIDGET = self.tab_widgets.widget(_from)
+        self.tab_widgets.removeWidget(MOVED_TAB_WIDGET)
+        self.tab_widgets.insertWidget(to, MOVED_TAB_WIDGET)
 
     def new_web_view_tab(self, qurl: QUrl = None, background: bool = False):
         """Creates a new tab containing a web view"""
-        browser = WebEngineView(self.main_window.tab_widgets, self.main_window)
+        browser = WebEngineView(self.main_window.tab_widgets)
         if qurl != None:
             browser.setUrl(qurl)
-        tab_index = self.addTab("Loading...")
+        TAB_INDEX = self.addTab("Loading...")
         self.tab_widgets.addWidget(browser)
 
         if not background:
-            self.setCurrentIndex(tab_index)
-            self.update_url(tab_index)
+            self.setCurrentIndex(TAB_INDEX)
+            self.update_url(TAB_INDEX)
 
-        self.tab_widgets.widget(tab_index).setAttribute(Qt.WA_DeleteOnClose, True)
+        self.tab_widgets.widget(TAB_INDEX).setAttribute(Qt.WA_DeleteOnClose, True)
 
-        return tab_index
+        return TAB_INDEX
 
     def close_tab(self, tab_index):
         """Closes a tab and quits Rubicon Web if theres no more tabs left"""

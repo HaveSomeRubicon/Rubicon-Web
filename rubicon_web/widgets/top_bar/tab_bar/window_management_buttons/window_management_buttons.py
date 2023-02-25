@@ -9,14 +9,7 @@ class WindowManagementButtons(QWidget, Ui_window_management_buttons):
     def __init__(self, parent, *args, **kwargs):
         """Initializes the window management buttons"""
         super(QWidget, self).__init__(parent=parent, *args, **kwargs)
-        self.parent().parent().parent().log(
-            "WindowManagementButtons are being initialized",
-            "OKAY",
-            "window_management_buttons.py",
-        )
+        self.main_window = self.parent().parent().parent()
+        self.main_window.log("WindowManagementButtons are being initialized", "OKAY", "window_management_buttons.py")
         self.setupUi(self)
-        self.parent().parent().parent().log(
-            "WindowManagementButtons have been initialized",
-            "OKAY",
-            "window_management_buttons.py",
-        )
+        self.main_window.log("WindowManagementButtons have been initialized", "OKAY", "window_management_buttons.py")

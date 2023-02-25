@@ -10,14 +10,13 @@ from widgets.web_engine.web_engine import WebEngineView
 
 
 class UrlBar(QLineEdit):
-    def __init__(self, parent, main_window, *args, **kwargs):
+    def __init__(self, parent, *args, **kwargs):
         """Initializes the URL bar"""
         super(UrlBar, self).__init__(parent=parent, *args, **kwargs)
-        self.parent().parent().parent().log(
+        self.main_window = self.parent().parent().parent()
+        self.main_window.log(
             "UrlBar is being initialized", "OKAY", "url_bar.py"
         )
-
-        self.main_window = main_window
 
         self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
         self.setPlaceholderText("Search or type a URL")
@@ -25,7 +24,7 @@ class UrlBar(QLineEdit):
         self.selected = False
 
         self.returnPressed.connect(self.change_url)
-        self.parent().parent().parent().log(
+        self.main_window.log(
             "UrlBar has been initialized", "SUCCESS", "url_bar.py"
         )
 
