@@ -4,20 +4,20 @@ import time
 from pathlib import PureWindowsPath, PurePosixPath
 
 from PyQt5.QtCore import Qt, QUrl
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QSplitter, QSizePolicy
 
-from ..main_window.Ui_main_window import Ui_MainWindow
 from ..top_bar.top_bar import TopBar
 from ..tab_widgets.tab_widgets import TabWidgets
 
 
-class MainWindow(QMainWindow, Ui_MainWindow):
+class MainWindow(QMainWindow):
     def __init__(self, parent, application_directory, log_function, *args, **kwargs):
         """Initializes the main window"""
         super(MainWindow, self).__init__(parent=parent, *args, **kwargs)
         log_function("MainWindow is being initialized", "OKAY", "mainwindow.py")
-        self.setupUi(self)
 
+        self.setWindowTitle("Rubicon Web")
+        
         self.log = log_function
         
         self.APPLICATION_DIRECTORY = application_directory
@@ -35,16 +35,29 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.relative_to_abs_path = lambda file_path: os.path.join(self.APPLICATION_DIRECTORY, file_path)
         self.nt_to_posix_path = lambda file_path: "".join(str(PurePosixPath(PureWindowsPath(file_path))).split("\\")[1:])
 
+        self.central_widget = QWidget(self)
+        self.central_widget.setObjectName("central_widget")
+        self.central_widget_layout = QVBoxLayout(self.central_widget)
+        self.central_widget_layout.setObjectName("central_widget_layout")
+        self.central_widget_layout.setContentsMargins(0, 0, 0, 0)
+        self.central_widget_layout.setSpacing(0)
+        self.setCentralWidget(self.central_widget)
+        
+        self.main_layout = QSplitter(self.central_widget)
+        self.main_layout.setObjectName("main_layout")
+        self.main_layout.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Minimum)
+        self.main_layout.setHandleWidth(0)
+        self.main_layout.setSizes([0])
+
+        self.central_widget_layout.addWidget(self.main_layout)
         self.tab_widgets = TabWidgets(self)
         self.main_layout.addWidget(self.tab_widgets)
 
         self.top_bar = TopBar(self)
-        self.centralwidget_layout.insertWidget(0, self.top_bar)
-
-        self.main_layout.setSizes([0])
+        self.central_widget_layout.insertWidget(0, self.top_bar)
 
         WIDGETS_WITH_STYLESHEETS = [
-            self.centralwidget,
+            self.central_widget,
             self.top_bar.nav_bar,
             self.top_bar,
             self.top_bar.tab_bar,
@@ -58,8 +71,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.setGeometry(*last_session["window_geometry"])
                 if last_session["maximized"]:
                     self.showMaximized()
-
-        self.setWindowTitle("Rubicon Web")
+        
         self.log("MainWindow has been initialized", "SUCCESS", "mainwindow.py")
 
     def init_stylesheets(self, widgets):
