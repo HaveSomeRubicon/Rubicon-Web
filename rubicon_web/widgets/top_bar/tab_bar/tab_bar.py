@@ -38,7 +38,7 @@ QTabBar::tab:selected {
     background: /tab_focus_color/;
 }
 QTabBar::close-button {
-    image: url(*rubicon_web/widgets/top_bar/tab_bar/tabs/svg/close tab button icon.svg*);
+    image: url(*widgets/top_bar/tab_bar/tabs/svg/close tab button icon.svg*);
 }""")
 
         self.tab_bar_layout = QHBoxLayout(self)
