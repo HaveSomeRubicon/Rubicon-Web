@@ -1,11 +1,10 @@
 from PyQt5.QtWidgets import QWidget, QSizePolicy, QHBoxLayout, QPushButton
 from PyQt5.QtCore import Qt, QSize
 
-from widgets.top_bar.nav_bar.Ui_nav_bar import Ui_nav_bar
 from widgets.top_bar.nav_bar.url_bar.url_bar import UrlBar
 
 
-class NavBar(QWidget, Ui_nav_bar):
+class NavBar(QWidget):
     def __init__(self, parent, *args, **kwargs):
         """Initializes the navigation bar"""
         super(NavBar, self).__init__(parent=parent, *args, **kwargs)
