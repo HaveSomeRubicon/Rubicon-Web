@@ -1,4 +1,6 @@
 from PyQt5.QtWebEngineWidgets import QWebEnginePage, QWebEngineView
+from PyQt5.QtCore import QRect, QRectF
+from PyQt5.QtGui import QPainterPath, QRegion
 
 
 class WebEnginePage(QWebEnginePage):
@@ -66,3 +68,12 @@ class WebEngineView(QWebEngineView):
         if not self.parent().count() < 1:
             if self == self.parent().currentWidget():
                 self.main_window.top_bar.nav_bar.url_bar.update_url(qurl, self)
+    
+    def resizeEvent(self, event) -> None:
+        radius = 10
+        path = QPainterPath()
+        path.addRoundedRect(QRectF(self.rect()), radius, radius)
+        mask = QRegion(path.toFillPolygon().toPolygon())
+        self.setMask(mask)
+        self.show()
+        return super().resizeEvent(event)
